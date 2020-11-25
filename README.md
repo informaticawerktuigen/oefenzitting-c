@@ -18,6 +18,9 @@ Vele programma's die we in deze les en de komende lessen gebruiken werken niet s
 Ze wel werkend krijgen zal meer moeite kosten dan gewoon een Ubuntu-omgeving op te starten.
 Het C-project zal ten slotte ook moeten werken in een Unix-omgeving.
 
+Indien je nog steeds geen UNIX-omgeving hebt, volg dan deze tutorial: 
+[Klaarzetten werkomgeving](https://github.com/informaticawerktuigen/klaarzetten-werkomgeving).
+
 ## Structuur oefenzitting
 
 Deze oefenzitting heeft een niet-traditionele structuur.
@@ -30,7 +33,7 @@ Het is echter een goed idee hier op voorhand al aan te werken, zodat je de tijd 
 
 Volg alle lessen in volgorde en doe dit zodra ze online staan en je hier tijd voor hebt. Indien je op een later moment in je project zou vastlopen kan je altijd terug naar de specifieke les gaan waarin je probleem behandeld werd.
 
-Stel ook zeker vragen op het discussieforum.
+Stel ook zeker vragen op het [discussieforum](https://p.cygnus.cc.kuleuven.be/webapps/discussionboard/do/forum?action=list_threads&course_id=_948319_1&nav=discussion_board_entry&conf_id=_1668620_1&forum_id=_939598_1).
 
 ## Het project
 
@@ -40,7 +43,7 @@ Uitgebreide informatie over het project zal verschijnen na de oefenzittingen op 
 
 Het gehele deel C is begroot op 1 studiepunt (30 uur) en wordt volledig afgewerkt in de komende drie weken.
 
-De bedoeling is dat je elke les in ongeveer 1h30 kan afwerken (video kijken + les doorlopen, oefeningen maken).
+De bedoeling is dat je elke les in ongeveer 1h30 kan afwerken (video kijken, les doorlopen, oefeningen maken).
 In totaal geeft dat een tijdsinvestering van 15 uur om de taal te leren.
 
 Bij iedere les zal ook een deel van het project horen (hierover vrijdag meer).
