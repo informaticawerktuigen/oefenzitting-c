@@ -2,6 +2,7 @@
 
 ## Inhoudstafel <!-- omit in toc -->
 
+- [Video](#video)
 - [Introductie](#introductie)
 - [Eerste C programma](#eerste-c-programma)
   - [Uitvoeren van een C programma](#uitvoeren-van-een-c-programma)
@@ -9,6 +10,10 @@
   - [Variabelen in C](#variabelen-in-c)
 - [Functies in C](#functies-in-c)
   - [Functiedefinities](#functiedefinities)
+
+## Video
+
+[![Bekijk de video](https://img.youtube.com/vi/_KXa459UUiA/hqdefault.jpg)](https://www.youtube.com/watch?v=_KXa459UUiA)
 
 ## Introductie
 
