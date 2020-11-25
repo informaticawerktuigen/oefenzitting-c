@@ -2,8 +2,6 @@
 
 ## Inhoudstafel <!-- omit in toc -->
 
-
-- [Werkomgeving](#werkomgeving)
 - [Introductie](#introductie)
 - [Eerste C programma](#eerste-c-programma)
   - [Uitvoeren van een C programma](#uitvoeren-van-een-c-programma)
@@ -11,14 +9,6 @@
   - [Variabelen in C](#variabelen-in-c)
 - [Functies in C](#functies-in-c)
   - [Functiedefinities](#functiedefinities)
-
-## Werkomgeving
-
-In deze lessen nemen we aan dat je werkt in Ubuntu of een andere UNIX-omgeving.
-Windows wordt *niet* ondersteund.
-Vele programma's die we in deze les en de komende lessen gebruiken werken niet standaard op Windows.
-Ze wel werkend krijgen zal meer moeite kosten dan gewoon een Ubuntu-omgeving op te starten.
-Het C-project zal ten slotte ook moeten werken in een Unix-omgeving.
 
 ## Introductie
 
