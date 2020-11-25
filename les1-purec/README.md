@@ -18,7 +18,7 @@ Het is essentieel om deze talen te begrijpen en te beheersen om een volledig beg
 Grote programma's schrijven in een machinetaal is echter tijdsintensief en complex.
 Een programma in machinecode bevat vaak patronen die telkens opnieuw terugkomen.
 Denk bijvoorbeeld aan het pushen van waarden naar de call stack (DRAMA: Berg op STapel) bij iedere functieoproep.
-Vele van deze patronen zijn telkens opnieuw hetzelfde, en zouden dus ook automatisch gegenereerd kunnen worden.
+Vele van deze patronen zijn telkens opnieuw hetzelfde, en kunnen dus ook automatisch gegenereerd worden.
 
 De programmeertaal C biedt hier een oplossing voor.
 C is één van de meest fundamentele programmeertalen.
@@ -28,7 +28,7 @@ Machinecode kan dus automatisch gegenereerd worden op basis van een C-programma.
 
 > :warning: C lijkt qua syntax meer op andere programmeertalen (Python, Java, JavaScript, ...) dan op machinetalen.
 > Je hebt functies, variabelen, lussen, enzovoort.
-> Correct programmeren in C vergt echter gelijkaardige kennis dan de kennis die je nodig hebt om te programmeren in machinetalen.
+> Correct programmeren in C vergt echter kennis die gelijkaardig is aan de kennis die je nodig hebt om te programmeren in machinetalen.
 > Je moet kennis hebben van de geheugenlayout van je machine, werken met geheugenadressen, begrijpen hoe functie-oproepen werken, enzovoort.
 > Probeer deze zittingen dus niet te *speedrunnen*.
 > Indien je bepaalde concepten enkel imiteert en niet begrijpt, zul je gegarandeerd op een later moment in de problemen komen.
@@ -67,7 +67,7 @@ gcc my-first-c-program.c
 ls -la
 ```
 
-* Uitvoerbare bestanden bevatten machinecode. We kunnen verifiëren dat onze main-functie naar machinecode is vertaald met het programma `gdb`, de standaard debugger voor eender welke executable in Linux.
+* Uitvoerbare bestanden bevatten machinecode. We kunnen verifiëren dat onze main-functie naar machinecode is vertaald door gebruik te maken van het programma `gdb` (de GNU debugger):
 
 ```bash
 $ gdb a.out -batch -ex 'set disassembly-flavor intel' -ex 'disassemble main'
@@ -147,10 +147,10 @@ Dit is een datatype.
 Elke variabele in C heeft een vast datatype.
 Dit datatype wordt vastgelegd op het moment dat je de variabele definieert.
 
-De C-compiler gebruikt datatypes om exact te bepalen hoeveel ruimte (bytes) er nodig zijn om een bepaalde variabele te bewaren.
+De C-compiler gebruikt datatypes onder andere om exact te bepalen hoeveel ruimte (bytes) er nodig zijn om een bepaalde variabele te bewaren.
 Zo kan een compiler bijvoorbeeld weten of de variabele bewaard kan worden in een register, of hoeveel bytes er op de stack (stapel) gereserveerd moeten worden wanneer de variabele daar geplaatst moet worden.
 
-Op datatypes gaan we dieper in gedurende de derde les C.
+Op datatypes gaan we dieper in gedurende de derde C-les.
 Voorlopig is het voldoende te weten dat een `int` (*integer*) een geheel getal bevat.
 
 * **Oefening** Schrijf een C programma dat de faculteit berekent van een getal `n` (dus `n!`) en dit teruggeeft via de exit code.
@@ -251,16 +251,16 @@ We komen hier in toekomstige sessies zeker op terug.
 
 ### Functiedefinities
 
-C (de opgvolger van de taal programmeertaal `B` [[1]](https://en.wikipedia.org/wiki/C_(programming_language))) is een zeer oude taal, ontwikkeld in 1972 en 1973.
+C (de opgvolger van de taal programmeertaal B [[1]](https://en.wikipedia.org/wiki/C_(programming_language))) is een zeer oude taal, ontwikkeld in 1972 en 1973.
 De machines waarop C compilers vroeger werkten hadden niet veel geheugen.
-Dat heeft invloed op de manier waarop C gecompileerd moet kunnen worden.
+Dat had invloed op de manier waarop C gecompileerd werd.
 
-Een C-compiler werkte traditioneel als volgt: regel per regel wordt een bestand ingelezen. Elke regel wordt rechtstreeks omgezet naar een regel machinecode, dat bewaard wordt in het outputbestand.
-De C-compiler moet elke regel kunnen vertalen zonder verder te moeten kijken in het bestand dat gelezen wordt - dit zou inefficiënt zijn.
-Enkel informatie die C reeds tegengekomen is bij het compileren kan dus gebruikt worden bij de vertaling van een regel code.
+Een C-compiler werkte traditioneel als volgt: regel per regel werd een bestand ingelezen. Elke regel werd rechtstreeks omgezet naar een regel machinecode, dat bewaard werd in het outputbestand.
+De C-compiler moest elke regel kunnen vertalen zonder verder te moeten kijken in het bestand dat gelezen werd - dit zou inefficiënt zijn en te veel geheugen vergen.
 
-Hierdoor heeft C een belangrijke regel: een functie kan niet opgeroepen worden voordat deze functie gedefinieerd is.
-De compiler kan namelijk onmogelijk een functie-oproep vertalen naar een functie die nog niet gekend is.
+Hierdoor kan enkel de informatie die de C compiler reeds eerder in het bestand tegengekomen is, gebruikt worden bij de vertaling van een regel code.
+Dit leidt ons tot een belangrijke regel in C: een functie mag niet opgeroepen worden voordat deze functie *gedeclareerd* is.
+De compiler kan namelijk onmogelijk een functie-oproep vertalen naar een functie die nog onbekend is.
 
 * Wissel de functies `manhattan_distance` en `absolute_value` van plaats in het voorgaande C-programma. Probeer dit te compileren.
 
@@ -273,12 +273,13 @@ functions.c:3:12: warning: implicit declaration of function ‘absolute_value’
 ```
 
 De compiler geeft een waarschuwing: de functie `absolute_value` werd *impliciet* gedeclareerd.
-Dit wil zeggen dat de compiler de functie niet herkent, en vervolgens op eigen houtje een functiedeclaratie genereert.
+Dit wil zeggen dat de compiler de functie niet herkent (de functiedefinitie staat pas later in het bestand), en vervolgens op eigen houtje een functiedeclaratie genereert.
 **Doe dit nooit!**
 Dit is een vorm van [*undefined behavior*](https://en.wikipedia.org/wiki/Undefined_behavior).
-De C-standaard specifieert niet wat er moet gebeuren in deze situatie, dus je compiler kan zelf kiezen wat hij doet.
+De C-standaard specifieert niet wat er moet gebeuren in deze situatie.
 Ook al zal een goede compiler waarschijnlijk doen wat je verwacht dat er zou moeten gebeuren, dit is helemaal geen garantie.
-Undefined behavior moet ten alle tijden vermeden worden en kan leiden tot zeer lastige bugs in je programma.
+Undefined behavior moet ten alle tijden vermeden worden.
+Het kan leiden tot zeer lastige bugs in je programma.
 
 Om te verhinderen dat we dit soort fouten maken, gaan we ons compilatiecommando uitbreiden.
 
@@ -294,21 +295,21 @@ functions.c:3:12: error: implicit declaration of function ‘absolute_value’ [
 
 Deze compilatieflags hebben het volgende effect:
 
-* `-Wall` zet alle waarschuwingen die een compiler kan geven aan
+* `-Wall` zet alle waarschuwingen die een compiler kan geven aan.
 * `-Werror` zorgt ervoor dat waarschuwingen omgezet worden in errors. Je wordt gedwongen om code met een waarschuwing te corrigeren.
 * `-std=c17` zorgt ervoor dat onze C-code moet voldoen aan de regels van de nieuwste C-standaard (uit 2017).
-* `-pedantic-error` zorgt ervoor dat code die niet voldoet aan de standaarden compiler errors genereert
+* `-pedantic-error` zorgt ervoor dat code die niet voldoet aan de standaarden ook compiler errors genereert
 
-Ons foute programma kan nu niet meer gecompileerd worden.
-Gebruik in de toekomst *altijd* de bovenstaande flags.
+Ons foute programma kan met deze strikte instellingen niet meer gecompileerd worden.
+Gebruik in de toekomst *altijd* bovenstaande flags.
 De regels van C breken is nooit een goed idee.
 
 Tijd om ons foutieve programma te repareren.
-We gaan hiervoor de functies niet terug van plaats verwisselen.
+We gaan de functies echter niet terug van plaats verwisselen.
 In plaats daarvan maken we gebruik van een expliciete functiedeclaratie.
 
 Met een functiedeclaratie kan je een functie *declareren* zonder deze te *definiëren*.
-Je zegt tegen de compiler dat een functie bestaat en dat de implementatie (definitie) van deze functie pas op een later moment volgt.
+Je zegt tegen de compiler dat de functie bestaat en dat de implementatie (definitie) van deze functie pas op een later moment volgt.
 
 De functiedeclaratie van de functie `absolute_value` schrijf je als volgt:
 
