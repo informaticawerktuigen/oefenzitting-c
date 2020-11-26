@@ -93,12 +93,14 @@ In commentaar plaatsen we de equivalente DRAMA-instructies.
 
 ```nasm
 endbr64         ;onbelangrijke instructie voor deze sessie
-push   rbp      ;BST R8 | Voeg de oude base pointer (omgevingswijzer) toe aan de stack/stapel
-mov    rbp,rsp  ;HIA R8, R9 | Laad de huidige waarde van de stack pointer (stapelwijzer) in de omgevingswijzer
+push   rbp      ;BST R8 | Voeg de oude frame pointer (omgevingswijzer) toe aan de stack/stapel
+mov    rbp,rsp  ;HIA R8, R9 | Laad de huidige waarde van de stack pointer (stapelwijzer) in de frame pointer (omgevingswijzer)
 mov    eax,0x0  ;HIA.w R0, 0 | Schrijf de waarde 0x0 (decimaal: 0) in register eax (het return-value register)
-pop    rbp      ;HST R8 | Laad de waarde op de top van de stack (stapel) in de base pointer (omgevingswijzer)
+pop    rbp      ;HST R8 | Laad de waarde op de top van de stack (stapel) in de frame pointer (omgevingswijzer)
 ret             ;KTG    | Spring naar de waarde op de top van de stack en pop deze waarde
 ```
+
+> :information_source: Bij het vertalen van C code naar machinecode volg je typisch *calling conventions*. Dit zijn afspraken die je volgt, bijvoorbeeld welke registers gebruikt worden om gekende waarden (de stack pointer, frame pointer) in op te slaan. DRAMA heeft andere calling conventions dan x86. In DRAMA wordt de base pointer/omgevingswijzer aangepast *voor* een functieoproep, in x86 gebeurt dit in de functie zelf. In DRAMA wordt deze vervolgens ook hersteld na terugkeer van de functieoproep, in x86 net voor terugkeer.
 
 Merk op dat het dus niet de C-broncode is die rechtstreeks uitgevoerd wordt (dat is niet mogelijk, een computer begrijpt geen C).
 Het gecompileerde programma wordt door de machine uitgevoerd.
@@ -239,6 +241,10 @@ ret                                 ;KTG
 ```
 
 > :information_source: Getallen die starten met de prefix `0x` zijn hexadecimale getallen! `0x10` is dus niet gelijk aan het decimale getal `10` maar wel het decimale getal `16`.
+
+<!-- ignore linter -->
+
+> :information_source: In DRAMA neemt een `int` slechts 1 geheugencel in. In x86 is elke geheugencel 1 byte groot en wordt een `int` voorgesteld door 4 bytes, dus 4 geheugencellen. Daarom is het verschil tussen de verschillende adressen dus telkens 4 in plaats van 1.
 
 We zien hier dat de parameters `x1`, `x2`, `y1` en `y2` via registers `edi`, `esi`, `edx` en `ecx` werden doorgegeven.
 Aan het begin van de functie werden al deze parameters op de call stack (stapel) bewaard.
