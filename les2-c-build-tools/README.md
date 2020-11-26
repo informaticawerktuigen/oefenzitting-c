@@ -19,7 +19,7 @@
 
 ## Video
 
-Coming very soon...
+[![Bekijk de video](https://img.youtube.com/vi/69xYSOAfD08/hqdefault.jpg)](https://www.youtube.com/watch?v=69xYSOAfD08)
 
 ## Introductie
 
