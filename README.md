@@ -9,6 +9,7 @@
 - [Tijdsinvestering](#tijdsinvestering)
 - [Lessen](#lessen)
   - [Les 1: pure C](#les-1-pure-c)
+  - [Les 2: C Build Tools](#les-2-c-build-tools)
 
 ## Werkomgeving
 
@@ -59,3 +60,7 @@ De deadline van het project zal vallen op zondag 13/12 23h59, twee dagen na de l
 ### Les 1: pure C
 
 In [deze les](https://github.com/informaticawerktuigen/oefenzitting-c/tree/main/les1-purec) leren jullie meer over de werking en de basissyntax van C.
+
+### Les 2: C Build Tools
+
+In [deze les](https://github.com/informaticawerktuigen/oefenzitting-c/tree/main/les2-c-build-tools) leren jullie meer over de verschillende tools die gebruikt worden bij het omzetten van een C-bestand naar een uitvoerbaar bestand.
