@@ -10,6 +10,7 @@
 - [Lessen](#lessen)
   - [Les 1: pure C](#les-1-pure-c)
   - [Les 2: C Build Tools](#les-2-c-build-tools)
+  - [Les 3: Bits & bytes](#les-3-bits--bytes)
 
 ## Werkomgeving
 
@@ -64,3 +65,8 @@ In [deze les](https://github.com/informaticawerktuigen/oefenzitting-c/tree/main/
 ### Les 2: C Build Tools
 
 In [deze les](https://github.com/informaticawerktuigen/oefenzitting-c/tree/main/les2-c-build-tools) leren jullie meer over de verschillende tools die gebruikt worden bij het omzetten van een C-bestand naar een uitvoerbaar bestand.
+
+### Les 3: Bits & bytes
+
+In [deze les](https://github.com/informaticawerktuigen/oefenzitting-c/tree/main/les3-bits-and-bytes) leren jullie over de manier waarop C intern data voorstelt, door datatypes te gebruiken die een betekenis geven aan willekeurige bits en bytes.
+De les bevat ook een uitgebreidere bespreking van verschillende operatoren in C, waaronder bitwise operatoren.
