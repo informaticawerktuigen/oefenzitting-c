@@ -29,7 +29,7 @@
 
 ## Video
 
-<!-- TODO -->
+[![Bekijk de video](https://img.youtube.com/vi/6MbIt705v7A/hqdefault.jpg)](https://www.youtube.com/watch?v=6MbIt705v7A)
 
 ## Introductie
 
