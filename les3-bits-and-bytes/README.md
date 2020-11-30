@@ -29,6 +29,12 @@
 
 ## Video
 
+> :warning: In deze video claim ik dat C de 2-complementsrepresentatie afdwingt voor negatieve getallen.
+> Dit klopt niet en zal gecorrigeerd worden.
+> Een C-compiler mag kiezen welke representatie gebruikt wordt.
+> In de meeste gevallen zal dit 2-complement zijn maar dit is *geen* garantie!
+> Een C-compiler mag kiezen om sign-magnitude of 1-complement te gebruiken, of eender welke andere representatie, zolang deze consistent gekozen wordt.
+
 [![Bekijk de video](https://img.youtube.com/vi/6MbIt705v7A/hqdefault.jpg)](https://www.youtube.com/watch?v=6MbIt705v7A)
 
 ## Introductie
@@ -90,8 +96,13 @@ Neem nu bijvoorbeeld het type dat we reeds kennen: de `int` (integer, geheel get
 Op een typische, moderne machine zal een `int` 4 bytes bevatten.
 Dat wil zeggen dat wanneer je een `int` aanmaakt, 4 bytes geheugen worden gereserveerd.
 Deze 4 bytes samen worden geïnterpreteerd als 1 getal: de waarde van de `int`.
-De interpretatie van de bytes gebeurt volgens de 2-complementsvoorstelling.
-Dat wil zeggen dat de `int` positieve en negatieve getallen kan bevatten.
+De bytes worden geïnterpreteerd als een getal dat negatief kan zijn.
+Negatieve getallen kunnen we echter op verschillende manieren voorstellen: de signed magnitude, 2-complement, 1-complement, ... .
+
+C legt geen onderliggende representatie op.
+De compiler kan zelf een keuze maken, waarschijnlijk gebaseerd op de onderliggende machine-architectuur.
+
+Wat wel altijd waar is, is dat een `int` positieve en negatieve getallen kan bevatten.
 
 > :warning: een `int` kan verschillen van grootte afhankelijk van de onderliggende machine-architectuur!
 
@@ -103,12 +114,10 @@ Een `char` is *bijna altijd* exact 1 byte groot.
 > :information_source: Een char is `CHAR_BIT` groot. Volgens de C standaard is `CHAR_BIT >= 8`, volgens de `POSIX` standaard moet `CHAR_BIT == 8`. In de praktijk zal je waarschijnlijk nooit in contact komen met chars die niet exact 1 byte groot zijn.
 
 Een `char` kan positieve en negatieve waarden bevatten.
-Opnieuw wordt de 2-complementsvoorstelling gebruikt.
-
-> :information_source: 2-complement wordt in C altijd gebruikt bij het voorstellen van negatieve waarden. Vanaf nu zullen we dit niet meer expliciet vermelden.
+Opnieuw kan C de binaire respresentatie van deze waarden kiezen.
 
 Bekijk onderstaand programma.
-De `printf`-regel zal de byte in de variabele `c` interpreteren volgens de 2-complementsvoorstelling en vervolgens de waarde van `c` uitprinten.
+De `printf`-regel zal de byte in de variabele `c` interpreteren volgens de intern gekozen representatie van mogelijks negatieve getallen en vervolgens de waarde van `c` uitprinten.
 
 * Welke uitvoer verwacht je te zien?
 * Zal dit programma in een oneindige lus terecht komen? Waarom wel/niet?
@@ -131,7 +140,7 @@ int main(void)
 > :warning: Bovenstaand `C`-programma maakt gebruik van *undefined behavior*. We doen dit om illustratieve redenen. Schrijf dit soort code nooit zelf!
 
 Stel dat we ons programma opnieuw lichtjes aanpassen.
-`%hhd` zorgde ervoor dat we de meegegeven variabele `c` interpreteerden als een signed number (getal dat positief of negatief kan zijn, dus 2-complementsvoorstelling) van 1 byte groot.
+`%hhd` zorgde ervoor dat we de meegegeven variabele `c` interpreteerden als een signed number (getal dat positief of negatief kan zijn) van 1 byte groot.
 Met `%hhu` zorgen we ervoor dat `c` wordt geïnterpreteerd als een getal dat *enkel* positief kan zijn.
 We stellen dezelfde vragen:
 
@@ -203,7 +212,7 @@ Doordat de optelling een vorm is van *undefined behavior* kan de C-compiler zelf
 Het kan in theorie dus zijn dat op jouw machine je toch in een *infinite loop* terecht komt.
 
 Wat we wel zeker weten is dat beide programma's minstens éénmaal, startend bij het getal `0b00000001`, elk mogelijk getal afliepen, tot `0b11111111`.
-Door te printen met `%hhd` *interpreteerden* we deze bits als 2-complement en zagen we dus negatieve getallen verschijnen vanaf het moment dat de meest significante bit `1` werd.
+Door te printen met `%hhd` *interpreteerden* we deze bits volgens de interne representatie van negatieve getallen. Op de meeste machines zal dit de 2-complementrepresentatie zijn en zal dit er dus toe leiden dat er negatieve getallen verschijnen vanaf het moment dat de meest significante bit `1` wordt.
 Door te printen met `%uud` *interpreteerden* we de bits als positieve getallen, dus zelfs indien de meest significante bit `1` was bleven we normale verhogingen zien.
 
 #### ASCII
