@@ -32,7 +32,7 @@
 > :warning: In deze video claim ik dat C de 2-complementsrepresentatie afdwingt voor negatieve getallen.
 > Dit klopt niet en zal gecorrigeerd worden.
 > Een C-compiler mag kiezen welke representatie gebruikt wordt.
-> In de meeste gevallen zal dit 2-complement zijn maar dit is *geen* garantie!
+> In de meeste gevallen (en op mijn machine) zal dit 2-complement zijn maar dit is *geen* garantie!
 > Een C-compiler mag kiezen om sign-magnitude of 1-complement te gebruiken, of eender welke andere representatie, zolang deze consistent gekozen wordt.
 
 [![Bekijk de video](https://img.youtube.com/vi/6MbIt705v7A/hqdefault.jpg)](https://www.youtube.com/watch?v=6MbIt705v7A)
