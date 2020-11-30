@@ -2,6 +2,7 @@
 
 ## Inhoudstafel <!-- omit in toc -->
 
+- [Video](#video)
 - [Introductie](#introductie)
 - [stdint.h](#stdinth)
 - [Pointers](#pointers)
@@ -13,6 +14,10 @@
     - [Arrays als parameters](#arrays-als-parameters)
   - [Strings](#strings)
   - [Structs](#structs)
+
+## Video
+
+[![Bekijk de video](https://img.youtube.com/vi/XxlZ4nYIqng/hqdefault.jpg)](https://www.youtube.com/watch?v=XxlZ4nYIqng)
 
 ## Introductie
 

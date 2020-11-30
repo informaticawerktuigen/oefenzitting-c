@@ -11,6 +11,7 @@
   - [Les 1: pure C](#les-1-pure-c)
   - [Les 2: C Build Tools](#les-2-c-build-tools)
   - [Les 3: Bits & bytes](#les-3-bits--bytes)
+  - [Les 4: Afgeleide datatypes](#les-4-afgeleide-datatypes)
 
 ## Werkomgeving
 
@@ -70,3 +71,7 @@ In [deze les](https://github.com/informaticawerktuigen/oefenzitting-c/tree/main/
 
 In [deze les](https://github.com/informaticawerktuigen/oefenzitting-c/tree/main/les3-bits-and-bytes) leren jullie over de manier waarop C intern data voorstelt, door datatypes te gebruiken die een betekenis geven aan willekeurige bits en bytes.
 De les bevat ook een uitgebreidere bespreking van verschillende operatoren in C, waaronder bitwise operatoren.
+
+### Les 4: Afgeleide datatypes
+
+In [deze les](https://github.com/informaticawerktuigen/oefenzitting-c/tree/main/les4-afgeleide-datatypes) beschouwen we enkele afgeleide datatypes: pointers, strings, arrays en structs.
