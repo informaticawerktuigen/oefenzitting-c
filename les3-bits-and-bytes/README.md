@@ -292,7 +292,7 @@ c2 has value 255
 
 Hoewel beide getallen exact dezelfde binaire waarde hebben (`0b11111111`), behandelt C `c1` als een negatief getal en `c2` als een positief getal.
 `c2` is namelijk unsigned en kan dus nooit negatief zijn.
-Wanneer we het getal met `print` gaan uitprinten, zeggen we tegen print, met behulp van de *format specifier* (`%hhu`, `%hhd`, `%h`, ...) hoe het getal moet geïnterpreteerd worden.
+Wanneer we het getal met `print` gaan uitprinten, zeggen we tegen print, met behulp van de *format specifier* (`%hhu`, `%hhd`, `%d`, ...) hoe het getal moet geïnterpreteerd worden.
 Dat kan echter verschillen van de interne interpretatie die C zelf gebruikt bij het uitvoeren van de code.
 
 ### Andere basistypes
@@ -576,7 +576,7 @@ Er wordt gebruik gemaakt van volgende waarheidstabel om de resultaatbits te bere
 
 ### Bitwise or
 
-`|` is de bitwise and-operator.
+`|` is de bitwise or-operator.
 Door `c = a | b` uit te voeren worden de individuele bits met dezelfde bit-index van twee variabelen `a` en `b` met elkaar vergeleken en bewaard in variabele `c`.
 Er wordt gebruik gemaakt van volgende waarheidstabel om de resultaatbits te berekenen:
 
@@ -587,7 +587,7 @@ Er wordt gebruik gemaakt van volgende waarheidstabel om de resultaatbits te bere
 
 ### Bitwise xor
 
-`^` is de bitwise and-operator.
+`^` is de bitwise xor-operator.
 Door `c = a ^ b` uit te voeren worden de individuele bits met dezelfde bit-index van twee variabelen `a` en `b` met elkaar vergeleken en bewaard in variabele `c`.
 Er wordt gebruik gemaakt van volgende waarheidstabel om de resultaatbits te berekenen:
 
