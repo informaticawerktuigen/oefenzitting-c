@@ -12,6 +12,7 @@
   - [Les 2: C Build Tools](#les-2-c-build-tools)
   - [Les 3: Bits & bytes](#les-3-bits--bytes)
   - [Les 4: Afgeleide datatypes](#les-4-afgeleide-datatypes)
+  - [Les 5: Scopes en lifetimes](#les-5-scopes-en-lifetimes)
 
 ## Werkomgeving
 
@@ -75,3 +76,8 @@ De les bevat ook een uitgebreidere bespreking van verschillende operatoren in C,
 ### Les 4: Afgeleide datatypes
 
 In [deze les](https://github.com/informaticawerktuigen/oefenzitting-c/tree/main/les4-afgeleide-datatypes) beschouwen we enkele afgeleide datatypes: pointers, strings, arrays en structs.
+
+### Les 5: Scopes en lifetimes
+
+In [deze les](https://github.com/informaticawerktuigen/oefenzitting-c/tree/main/les5-scopes-and-lifetimes) gaan we kijken naar de levensduur van variabelen.
+Dynamisch geheugenbeheer met behulp van *malloc* en *free* wordt onder andere geïntroduceerd.
