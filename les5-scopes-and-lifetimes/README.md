@@ -15,8 +15,7 @@
 
 ## Video
 
-Coming soon...
-
+[![Bekijk de video](https://img.youtube.com/vi/ti8-oMvOlO4/hqdefault.jpg)](https://www.youtube.com/watch?v=ti8-oMvOlO4)
 ## Introductie
 
 In deze sessie gaan we kijken naar de levensduur (*lifetimes*) en *scopes* van variabelen in C.
