@@ -1,4 +1,4 @@
 *.o
 *a.out
 les1-purec/fibonacci
-lesx-gdb/*
+lesx-scratchpad/*
