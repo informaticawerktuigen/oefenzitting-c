@@ -13,6 +13,7 @@
   - [Les 3: Bits & bytes](#les-3-bits--bytes)
   - [Les 4: Afgeleide datatypes](#les-4-afgeleide-datatypes)
   - [Les 5: Scopes en lifetimes](#les-5-scopes-en-lifetimes)
+  - [Les 6: Dynamische structuren](#les-6-dynamische-structuren)
 
 ## Werkomgeving
 
@@ -81,3 +82,9 @@ In [deze les](https://github.com/informaticawerktuigen/oefenzitting-c/tree/main/
 
 In [deze les](https://github.com/informaticawerktuigen/oefenzitting-c/tree/main/les5-scopes-and-lifetimes) gaan we kijken naar de levensduur van variabelen.
 Dynamisch geheugenbeheer met behulp van *malloc* en *free* wordt onder andere geïntroduceerd.
+
+
+### Les 6: Dynamische structuren
+
+In [deze les](https://github.com/informaticawerktuigen/oefenzitting-c/tree/main/les6-dynamische-structuren) leren we hoe dynamisch geheugen ons toelaat om gegevensstructuren te bouwen die doorheen het programma groter of kleiner kunnen worden.
+We bekijken het concept door de implementatie van lijsten te bestuderen.
