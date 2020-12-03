@@ -27,7 +27,7 @@ void list_destroy(struct List *list)
 
 void list_append(struct List *list, int value)
 {
-    if (list->length == LIST_MAX_SIZE - 1)
+    if (list->length == LIST_MAX_SIZE)
     {
         return;
     }
