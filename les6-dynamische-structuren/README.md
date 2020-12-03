@@ -2,6 +2,7 @@
 
 ## Inhoudstafel <!-- omit in toc -->
 
+- [Video](#video)
 - [Introductie](#introductie)
 - [Lijsten](#lijsten)
 - [Dynamische lijsten](#dynamische-lijsten)
@@ -14,6 +15,10 @@
     - [`list_print`](#list_print)
     - [`list_destroy`](#list_destroy)
     - [Oefeningen](#oefeningen)
+
+## Video
+
+[![Bekijk de video](https://img.youtube.com/vi/NBNHEppt7d8/hqdefault.jpg)](https://www.youtube.com/watch?v=NBNHEppt7d8)
 
 ## Introductie
 
