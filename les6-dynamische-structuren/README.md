@@ -203,7 +203,7 @@ De volledige code met behulp van `malloc` kan je vinden in `examples/naive-list-
 
 De lijst die we gemaakt hebben is echter geen dynamische gegevensstructuur.
 De hoeveelheid geheugen die elke lijst inneemt ligt vast.
-Lijsten kunnen dus niet langer kunnen worden dan de limiet die we zelf opleggen.
+Lijsten kunnen dus niet langer worden dan de limiet die we zelf opleggen.
 In dit geval is dat 100.
 Indien je de limiet vergroot, zal je voor kleine lijsten enorm veel geheugen verspillen.
 Indien de limiet klein blijft, zal je geen grote lijsten kunnen maken.
@@ -397,7 +397,7 @@ Aangezien het nieuwe element aan het einde van de lijst wordt toegevoegd, zetten
 
 ##### Lege lijst
 
-Indien de lijst leeg was, zoals hierboven afgebeeld, zullen we de `first`-pointer moeten aanpassen onderstaande operaties moeten uitvoeren:
+Indien de lijst leeg was, zoals hierboven afgebeeld, zullen we de `first`-pointer moeten aanpassen en onderstaande operaties moeten uitvoeren:
 
 ```C
 if (list->first == NULL) //lege lijst
