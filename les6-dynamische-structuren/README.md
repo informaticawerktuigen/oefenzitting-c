@@ -197,7 +197,7 @@ In een complexere variant die we later in deze sessie zullen bespreken zal er ec
 
 De volledige code met behulp van `malloc` kan je vinden in `examples/naive-list-malloc.c`.
 
-> **:question: Voeg een functie `int list_pop(struct List *list)` toe aan bovenstaand programma. Deze functie verwijdert de laatste waarde uit een lijst en geeft deze waarde terug als resultaat.**
+> **:question: Voeg een functie `int list_pop(struct List *list)` toe aan bovenstaand programma. Deze functie verwijdert de laatste waarde uit een lijst en geeft deze waarde terug als resultaat. Hierbij mag je aannemen dat de gegeven lijst niet leeg is.**
 
 ## Dynamische lijsten
 
