@@ -63,7 +63,7 @@ Pointers wijzen meestal naar een specifiek type:
 * Het datatype _pointer naar een `int`_ schrijven we in C als het type `int *`. 
 * De waarde van een variabele met type `int *` wordt geïnterpreteerd als het _geheugenadres_ van een `int` object.
 * Het datatype _pointer naar een `char`_ schrijven we in C als het type `char *`
-* De waarde van een variabele met type `char *` wordt geïnterpreteerd als het _geheugenadres_ van een `int` object.
+* De waarde van een variabele met type `char *` wordt geïnterpreteerd als het _geheugenadres_ van een `char` object.
 * ...
   
 Er is één uitzondering:
