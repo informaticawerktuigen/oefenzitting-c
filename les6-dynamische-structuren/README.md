@@ -146,7 +146,7 @@ De statement `return list;` maakt namelijk een volledige kopie van de zonet aang
 Dit is inefficiënt wanneer de `struct` veel plaats inneemt.
 Indien de lijst bijvoorbeeld `400 bytes` groot is, moeten al deze bytes gekopieerd worden in de `return` statement.
 
-Misschien zou je deze inefficiënte **foutief** proberen oplossen als volgt:
+Misschien zou je deze inefficiëntie **foutief** proberen oplossen als volgt:
 
 ```C
 struct List *list_create(void)
