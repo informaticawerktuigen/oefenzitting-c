@@ -2,6 +2,7 @@
 
 ## Inhoudstafel <!-- omit in toc -->
 
+- [Video](#video)
 - [Introductie](#introductie)
 - [Programma-argumenten](#programma-argumenten)
 - [Standard streams](#standard-streams)
@@ -11,6 +12,10 @@
     - [`fgets`](#fgets)
 - [Files](#files)
 - [Man pages](#man-pages)
+
+## Video
+
+[![Bekijk de video](https://img.youtube.com/vi/GJ-pwW_ADgk/hqdefault.jpg)](https://www.youtube.com/watch?v=GJ-pwW_ADgk)
 
 ## Introductie
 
