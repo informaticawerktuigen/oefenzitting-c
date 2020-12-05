@@ -19,7 +19,6 @@ We hebben `printf` gebruikt om uitvoer te printen en `malloc` gebruikt om dynami
 C biedt echter nog veel meer functionaliteit om met het onderliggende systeem te interageren.
 
 In deze les nemen we een kijkje naar zaken als programma-input en file I/O.
-We kijken ook naar enkele operaties die het werken met strings eenvoudiger zullen maken.
 
 ## Programma-argumenten
 
