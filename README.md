@@ -14,6 +14,7 @@
   - [Les 4: Afgeleide datatypes](#les-4-afgeleide-datatypes)
   - [Les 5: Scopes en lifetimes](#les-5-scopes-en-lifetimes)
   - [Les 6: Dynamische structuren](#les-6-dynamische-structuren)
+  - [Les 7: Systeeminteractie](#les-7-systeeminteractie)
 
 ## Werkomgeving
 
@@ -88,3 +89,8 @@ Dynamisch geheugenbeheer met behulp van *malloc* en *free* wordt onder andere ge
 
 In [deze les](https://github.com/informaticawerktuigen/oefenzitting-c/tree/main/les6-dynamische-structuren) leren we hoe dynamisch geheugen ons toelaat om gegevensstructuren te bouwen die doorheen het programma groter of kleiner kunnen worden.
 We bekijken het concept door de implementatie van lijsten te bestuderen.
+
+
+### Les 7: Systeeminteractie
+
+In [deze les](https://github.com/informaticawerktuigen/oefenzitting-c/tree/main/les7-system-interaction) leren we meer over I/O in C, vanuit de command line of via bestanden.
