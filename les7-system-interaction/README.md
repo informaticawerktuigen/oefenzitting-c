@@ -41,7 +41,7 @@ De waarden `argv[1]` tot en met `argv[argc-1]` zullen de parameters van het prog
 > Indien je toch een array als parameter van een functie declareert, wordt dit automatisch omgezet (decayed) naar een pointer naar het eerste element van de array (dus `int[]` als parameter wordt omgezet naar `int*`).
 > `char*[]` als parameter is dus hetzelfde als schrijven `char**`, een pointer naar het eerste element van een array van strings.
 
-Onderstaande programma print alle argumenten mee die het krijgt:
+Onderstaand programma print alle argumenten mee die het krijgt:
 
 * Compileer het onderstaande programma. Voer het uit en geef via de command-line argumenten mee.
 
@@ -118,7 +118,7 @@ Printing to the stdout
 Printing to the stderr
 ```
 
-Je kan de output van dit programma echter naar een bestand doorverwijzen:
+Je kan de `stdout` van dit programma echter naar een bestand doorverwijzen:
 
 ```bash
 $ ./a.out > file
@@ -150,9 +150,9 @@ Met `int fgetc(FILE *stream)` kunnen we een karakter lezen uit een `FILE *`.
 `stdin` heeft het type `FILE *` en kan dus meegegeven worden aan `fgetc`.
 Zo kunnen we een karakter lezen uit de `stdin`.
 
-Onderstaand programma in een simpele `ASCII`-omzetter.
+Onderstaand programma is een simpele `ASCII`-omzetter.
 Het leest de invoer, meegegeven aan `stdin`, karakter per karakter, en print elk karakter naar de `stdout`.
-We interpreteren de karakters eerst als ASCII-letter, met `%c`, en vervolgens als getal, met `%d`.
+We interpreteren de karakters eerst als ASCII-letters, met `%c`, en vervolgens als getal, met `%d`.
 
 * Compileer onderstaand bestand. Voer het programma uit, en geef hierbij via `bash` een inputbestand op de `stdin` met de `<`-operator.
 
@@ -171,7 +171,7 @@ int main(void)
 }
 ```
 
-> :information_source: Het speciale karakter `EOF` (end-of-file) geeft het einde van een bestand aan. We blijven karakters lezen tot we dit karakter tegenkomen.
+> :information_source: Het speciale karakter `EOF` (end-of-file) geeft het einde van een bestand aan. We blijven karakters lezen tot we dit karakter tegenkomen. Bij een leesfout geeft `fgetc` *ook* `EOF` terug.
 
 > :information_source: Indien je dit programma uitvoert zonder `<` operatie zal je merken dat je interactieve invoer kan geven. Elke keer wanneer je iets typt en op enter duwt, zal dit naar de `stdin` worden gestuurd. Het programma zal dit vervolgens uitlezen. Met <kbd>CTRL</kbd> + <kbd>D</kbd> kan je een `EOF` sturen om deze modus te beeïndigen.
 
@@ -247,7 +247,7 @@ Bovenstaande vraag toont aan dat `fgets` onverwacht gedrag kan vertonen wanneer 
 Een grote uitdaging aan low-level programmeren is het feit dat je programma uitgevoerd kan worden met eender welke random invoer.
 Voor deze onschuldige programma's kan het niet veel kwaad, maar stel dat je bijvoorbeeld een web server schrijft in C, kan het incorrect afhandelen van gebruikersinvoer leiden tot zware security vulnerabilities.
 
-Het bestand dat we gegenereerd hebben bevat `\0` op foute plaatsen.
+> :information_source: Het bestand dat we gegenereerd hebben bevat `\0` op foute plaatsen.
 `\0` toevoegen aan bestanden om te proberen applicaties te exploiten ("hacken") wordt [null byte injection](http://projects.webappsec.org/w/page/13246949/Null%20Byte%20Injection) genoemd.
 
 ## Files
@@ -319,7 +319,7 @@ int main(void)
 
 > **:question: Voer het commando `man fwrite` uit om te achterhalen hoe `fwrite` werkt. Wat doet de `fwrite`-regel in bovenstaande code? Voer het commando `man fopen` uit om te achterhalen waarom `wb` gebruikt wordt in de `fopen`-regel. Was dit nodig?**
 
-Indien je dit bestand probeert te openen met `gedit`, zal gedit je niet veel nuttige informatie kunnen tonen.
+Indien je dit bestand probeert te openen met `gedit`, zal `gedit` je niet veel nuttige informatie kunnen tonen.
 
 ```bash
 $ gedit binary_file
@@ -346,7 +346,7 @@ binary_file: data
 
 Zoals je ziet heeft ons bestand geen speciale structuur, `file` rapporteert enkel *data*.
 
-Een goede manier om elk mogelijk bestand uit te lezen, tekst of geen tekst, is met een *hex viewer*. Het programma `hd` (hex dump) toont je volledige bestand byte per byte, hexadecimaal voorgesteld.
+Een goede manier om elk mogelijk bestand uit te lezen, tekst of geen tekst, is met behulp van een *hex viewer*. Het programma `hd` (hex dump) toont je volledige bestand byte per byte, hexadecimaal voorgesteld.
 
 > **:question: Voer het commando `hd binary_file` uit. Kijk naar de data in het bestand. Komt dit overeen met wat je had verwacht na de documentatie van `fwrite` te lezen?**
 
@@ -354,11 +354,11 @@ Een goede manier om elk mogelijk bestand uit te lezen, tekst of geen tekst, is m
 
 ## Man pages
 
-Voorgaande oefening liet jullie de [*man pages*](https://en.wikipedia.org/wiki/Man_page) gebruiken om te leren werken met de File API van C.
+Voorgaande oefeningen lieten jullie de [*man pages*](https://en.wikipedia.org/wiki/Man_page) gebruiken om te leren werken met de File API van C.
 De man pages vormen een enorm belangrijke bron van informatie voor C-programmeurs.
 Het is verleidelijk om gewoon te googlen op de naam van de functie met `C` erbij, en je zal ongetwijfeld resultaten vinden waarmee je aan de slag kan, misschien zelfs voorbeeldcode.
 
-Bekijk echter het verschil in kwaliteit van documentatie op een pagina als [dit](https://www.tutorialspoint.com/c_standard_library/c_function_fopen.htm) en het resultaat van `man fopen`.
+Bekijk echter het verschil in kwaliteit van documentatie op [deze pagina](https://www.tutorialspoint.com/c_standard_library/c_function_fopen.htm) en het resultaat van `man fopen`.
 Vele details worden weggelaten, die toch belangrijk kunnen zijn.
 Wees je ervan bewust dat de beste kwaliteit van documentatie gevonden zal worden in de *man pages*.
 
@@ -379,6 +379,7 @@ De eerste code start met
 > Waarom wordt `<stdlib.h>` hier niet geïnclude?
 > De betere vraag zou zijn, waarom wordt dit wél geïnclude in het eerste voorbeeld.
 > Er is geen enkele reden voor die include, die kan gewoon weggelaten worden.
+> 
 > Een andere interessante discussie is waarom ze `feof` gebruiken in hun tweede voorbeeld, in plaats van de return-waarde met `EOF` te vergelijken.
 > Op zich perfect legitiem, maar ze zouden ook `ferror` moeten oproepen indien dat hun aanpak is, want `feof` detecteert geen *read errors* [[meer info]](https://stackoverflow.com/questions/36164718/confusion-with-eof-vs-feof).
 > De codevoorbeelden zijn niet fout, maar het zijn ook niet per sé *goede* voorbeelden die je blindelings moet volgen.
