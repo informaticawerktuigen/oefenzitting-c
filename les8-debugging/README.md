@@ -56,6 +56,7 @@ int main(void)
 
         printf("\n");
     }
+    return 0;
 }
 ```
 
@@ -75,15 +76,15 @@ Als ik deze foutboodschap opzoek krijg ik:
 > In computing, a bus error is a fault raised by hardware, notifying an operating system (OS) that a process is trying to access memory that the CPU cannot physically address: an invalid address for the address bus, hence the name.
 [[Bron: Wikipedia]](https://en.wikipedia.org/wiki/Bus_error)
 
-Er wordt een adres aangesproken dat niet bestaat? Zeer vreemd.
+Er wordt een adres aangesproken dat niet bestaat. Zeer vreemd.
 
-> **:question: Kan je de fout zien in vorig programma? (spendeer hier niet té lang aan!)**
+> **:question: Kan je de fout zien in vorig programma? Probeer dit zeker, maar spendeer er niet té lang aan!**
 
 ## Printf debugging
 
 Debugging met print statements, soms [printf debugging genoemd](https://stackoverflow.com/questions/189562/what-is-the-proper-name-for-doing-debugging-by-adding-print-statements) (naar `printf` in C), is een zeer legitieme manier van debuggen.
 
-Foutopsporing gebeurt bijvoorbeeld vaak met behulp van [logs](https://en.wikipedia.org/wiki/Log_file), tekstbestanden waar programma's interne output schrijven, die bekekeken kunnen worden op het moment dat het misgaat.
+Foutopsporing gebeurt bijvoorbeeld vaak met behulp van [logs](https://en.wikipedia.org/wiki/Log_file), tekstbestanden waar programma's interne output schrijven, die bekeken kunnen worden op het moment dat een programma gecrasht is.
 
 Op Linux gebeurt dit bijvoorbeeld voortdurend.
 In de folder `/var/log` kan je in Ubuntu logfiles terugvinden van vele programma's. Voer bijvoorbeeld onderstaand commando uit om zo'n log te inspecteren:
@@ -93,10 +94,12 @@ $ cat /var/log/bootstrap.log | less
 ```
 
 Indien je ongeveer weet waar een fout zich voordoet, kan het toevoegen van een print-statement een snelle en eenvoudige manier zijn om te achterhalen wat misloopt.
-Laten we dit eens uitproberen in het voorbeeld.
 
+Laten we print-debugging eens uitproberen op ons buggy programma van de introductie.
 Misschien had je al wel het vermoeden dat de code crasht in één van de twee `if`-cases.
 Er wordt namelijk maar één iteratie uitgevoerd van de for-loop, alvorens de start van de tweede iteratie, crasht het programma.
+Dat zien we aan het feit dat de initiële print-statement maar één keer wordt uitgevoerd.
+
 Loopt er dus misschien iets mis met de waarde van `i`?
 Laten we eens een print-statement plaatsen in beide cases:
 
@@ -123,7 +126,7 @@ i: 0
 Bus error (core dumped)
 ```
 
-Ai, dit maakt ons niet veel wijzer. Welk van de twee print-statements is zonet uitgevoerd?
+Dit maakt ons niet veel wijzer. Welk van de twee print-statements is zonet uitgevoerd?
 Je zou op dit moment misschien tot de conclusie komen dat de if-statement met conditie `i - 1 >= 0` niet uitgevoerd zou moeten worden (want `i == 0`), en dat de code dus crasht in de print-statement van de tweede if-statement.
 
 Dit illustreert meteen een nadeel van deze stijl van debugging.
@@ -158,9 +161,9 @@ Blijkbaar is `0 - 1 >= 0`?!
 
 > **:question: Kan je op basis van deze info zien wat er misloopt in dit programma?**
 
-Misschien heb je nog niet kunnen verklaren waarom de if-statement uitgevoerd wordt, maar besef je al wel dat de index die we meegeven aan array incorrect zal zijn.
+Misschien heb je nog niet kunnen verklaren waarom de if-statement uitgevoerd wordt, maar besef je al wel dat de index die we meegeven aan de array incorrect zal zijn.
 Element 0 heeft namelijk geen linkse buur, dat was net de reden van de if-statement.
-Blijkbaar leidt `array[i - 1]` hier dus tot de *bus error*.
+Blijkbaar leidt `array[i - 1]` met `i == 0` hier dus tot de *bus error*.
 Door die statement uit te voeren ga je inderdaad een geheugenadres aanspreken, in dit geval blijkbaar een geheugenadres dat niet bestaat.
 
 Tijd om de waarde van `i - 1` te printen en het mysterie op te lossen:
@@ -182,11 +185,11 @@ My current value is: 0
 Bus error (core dumped)
 ```
 
-> **:question: Indien je nog niet weet waarom deze waarde geprint wordt, probeer dit te achterhalen door nogmaals naar het originele programma te kijken. Hoe kan het dat `i - 1` gelijk is aan een positief getal, wanneer `i` gelijk is aan `0`?**.
+> **:question: Indien je nog niet weet waarom deze waarde van `i` geprint wordt, probeer dit te achterhalen door nogmaals naar het originele programma te kijken. Hoe kan het dat `i - 1` gelijk is aan een (zeer groot) positief getal, wanneer `i` gelijk is aan `0`?**.
 
 `unsigned` (hetzelfde als `unsigned int`) is een *unsigned* type en kan dus nooit negatief zijn.
-Wanneer we `i - 1` uitrekenen met `i == 0`, krijgen we in plaats van `-1` de waarde `UINT_MAX`, het grootst mogelijke getal dat voorgesteld kan worden door een `unsigned int` op jouw machine.
-Door dat te gebruiken als index in een array, spreken we het geheugenadres `&array[0] + UINT_MAX * sizeof(array[0])` aan.
+Wanneer we `i - 1` berekenen op het moment dat `i == 0`, krijgen we in plaats van `-1` de waarde `UINT_MAX`, het grootst mogelijke getal dat voorgesteld kan worden door een `unsigned int` op de machine.
+Door `UINT_MAX` te gebruiken als index in een array, spreken we het geheugenadres `&array[0] + UINT_MAX * sizeof(array[0])` aan.
 Dit stelt op mijn machine geen geldig geheugenadres voor, dus krijg ik een *bus error*.
 
 Hier het gecorrigeerde programma:
@@ -204,17 +207,18 @@ int main(void)
     {
         printf("My current value is: %d\n", array[i]);
 
-        if (i > 0)
+        if (i > 0) //fix 1
         {
             printf("The value to my left is: %d\n", array[i - 1]);
         }
 
-        if (i < array_length - 1)
+        if (i < array_length - 1) //fix 2
         {
             printf("The value to my right is %d\n", array[i + 1]);
         }
         printf("\n");
     }
+    return 0;
 }
 ```
 
@@ -224,14 +228,16 @@ Je kan verifiëren dat dit programma wel correct uitvoert.
 
 ## `gdb`
 
-Voorgaand probleem konden we oplossen met `print`-statements.
-Het was echter mogelijk op een dwaalspoor te geraken door foute conclusies te trekken over het pad dat de code genomen had.
-Door middel van een debugger kunnen we het probleem veel sneller ontdekken.
+Het is ons gelukt voorgaand probleem op te lossem met behulp `print`-statements.
+Het was echter ook mogelijk dat we op een dwaalspoor waren beland, door foute conclusies te trekken over het pad dat de code aan het nemen was.
+Door gebruik te maken van een debugger kunnen we het probleem veel sneller achterhalen.
 
 Laten we onze code compileren met de debugflag `-g`.
 Deze flag zorgt ervoor dat `gcc` debuginformatie in de gegenereerde executable verwerkt.
-Onder andere de C-broncode wordt mee in de executable bewaard zodat een debugger bij de regels machinecode kan tonen welke broncode ervoor gezorgd hebben dat deze code gegenereerd werd.
-Je kan debuggen zonder `-g` executable, maar indien je de mogelijkheid hebt om de `-g` flag te gebruiken, zal dit het een stuk eenvoudiger maken.
+Onder andere de C-broncode wordt mee in de executable bewaard.
+Hierdoor kan een debugger tonen welke broncode ervoor gezorgd heeft dat een fout zich voordeed.
+
+> :warning: Je kan debuggen zonder `-g` executable, maar indien je de mogelijkheid hebt om de `-g` flag te gebruiken, zal dit het een stuk eenvoudiger maken. Zonder `-g` zal je enkel namen van functies en machinecode te zien krijgen.
 
 Compileer het foute programma met `gcc -g`:
 
@@ -264,13 +270,13 @@ Program received signal SIGBUS, Bus error.
 15                  printf("The value to my left is: %d\n", array[i - 1]);
 ```
 
-We krijgen al een stuk meer informatie.
+We krijgen al een stuk meer informatie vergeleken met een normale uitvoering van het programma.
 `gdb` toont ons dat lijn 15 in de broncode ervoor zorgde dat ons programma crasht.
-Dit simpele commando geeft ons dus evenveel info als al de print-statements die we geplaatst hebben om te achterhalen waar de crash zich voordeed!
+Dit simpele commando geeft ons dus al evenveel info als alle print-statements die we eerder geplaatst hebben om te achterhalen waar de crash zich voordeed.
 
-We kunnen vervolgens proberen achterhalen wat de reden is van de crash.
+We kunnen vervolgens proberen te achterhalen wat de reden is van de crash.
 Met het `print` commando kan je een GDB-expressie uitvoeren en daarvan het resultaat printen.
-Deze expressie kan gebruik maken van `C` variabelen of zelfs rechtstreeks van registerwaarden.
+Deze expressie kan gebruik maken van variabelen of zelfs rechtstreeks van registerwaarden.
 Laten we de waarde van `i` en `i - 1` printen:
 
 ```gdb
@@ -280,9 +286,11 @@ $1 = 0
 $2 = 4294967295
 ```
 
-We hebben alle informatie gevonden die we eerder reeds achterhaald hadden, maar op een veel snellere en efficiëntere manier.
-We moesten onze broncode niet aanpassen en recompilen om print statements toe te voegen en zo de fout te zoeken.
-Gewoon het programma een keertje uitvoeren in de debugger bleek voldoende te zijn.
+We hebben nu dus alle informatie gevonden die we eerder reeds achterhaald hadden met print statements, maar op een veel snellere en efficiëntere manier.
+We moesten onze broncode niet aanpassen om print statements toe te voegen en zo de fout te zoeken.
+Op het moment dat we de fout vonden moesten we ons ook niet bezig houden met het verwijderen van alle onnodige print-statements.
+
+Simpelweg het programma een keertje uitvoeren in de debugger bleek voldoende te zijn.
 
 ### Single stepping
 
@@ -326,7 +334,7 @@ Starting program: /home/kobe/courses/iw/oefenzitting-c/les8-debugging/examples/a
 [Inferior 1 (process 29056) exited normally]
 ```
 
-Indien we het programma willen *single steppen*, moeten we starten met een breakpoint te plaatsen.
+Indien we het programma willen *single steppen*, moeten we starten door een breakpoint te plaatsen.
 Door een breakpoint (pauzepunt) te plaatsen op een regel code, zorg je ervoor dat het programma gepauzeerd zal worden net vóór de regel code wordt uitgevoerd.
 We zetten een breakpoint op de functie `main`:
 
@@ -341,7 +349,7 @@ Indien we het programma nu uitvoeren, zal de uitvoering pauzeren net voor de eer
 
 >:information_source: Je kan ook een breakpoint plaatsen op een specifieke regel van een bronbestand met het commando `break filename:line`.
 
-Wanneer we nu `run` uitvoeren, pauzeert het programma:
+Wanneer we nu `run` uitvoeren, pauzeert het programma aan onze breakpoint:
 
 ```gdb
 (gdb) run
@@ -368,7 +376,7 @@ Laten we de eerste regel van `main` uitvoeren:
 $2 = 0
 ```
 
-Bij elke uitvoering van `step`, wordt de *volgende* regel code uitgevoerd. Regel 5 is dus nog *niet* uitgevoerd. `i` heeft nog steeds een willekeurige waarde, in dit geval `0`.
+Bij elke uitvoering van `step`, wordt de *volgende* regel code uitgevoerd. Regel 5 (`unsigned i = 1;`) is dus nog *niet* uitgevoerd. `i` heeft nog steeds een willekeurige waarde, in dit geval `0`.
 
 ```gdb
 (gdb) step
@@ -382,11 +390,11 @@ Na regel 5 uit te voeren zien we dat `i` inderdaad de waarde `1` toegewezen kree
 
 ### Watchpoints
 
-Ons doel van deze debugging is om te achterhalen hoe de waarde van `i` evolueert gedurende de uitvoering van ons programma.
-We zouden met `step` alles stap voor stap kunnen uitvoeren en na elk `step` commando kunnen we manueel `print i` kunnen uitvoeren.
+Ons doel van deze debuggingsessie is om te achterhalen hoe de waarde van `i` evolueert gedurende de uitvoering van ons programma.
+We kunnen met `step` alles stap voor stap uitvoeren en na elk `step` commando kunnen we manueel `print i` uitvoeren.
 
 Er is echter een gemakkelijkere manier om de evolutie van `i` te bekijken doorheen het programma: met een *watchpoint*.
-Door een watchpoint te plaatsen op een variabele, zorg je ervoor dat je programma automatisch gepauzeerd wordt op het moment dat de variabele van waarde wijzigt.
+Door een watchpoint te plaatsen op een variabele, zorg je ervoor dat je programma automatisch gepauzeerd wordt op het moment dat de variabele van waarde verandert.
 
 Laten we een watchpoint plaatsen op `i`:
 
@@ -396,7 +404,7 @@ Hardware watchpoint 2: i
 ```
 
 Vervolgens kunnen we ons programma gewoon verder laten uitvoeren met `continue`.
-Het programma zal pauzeren bij het eerstvolgende breakpoint (die zijn er niet), of wanneer `i` van waarde verandert:
+Het programma zal pauzeren bij het eerstvolgende breakpoint (die zijn er niet meer), of wanneer `i` van waarde verandert:
 
 ```gdb
 (gdb) continue
@@ -412,8 +420,9 @@ main () at single-step.c:6
 
 We krijgen de melding dat de watchpoint op `i` getriggerd is. 
 `i` is dus van waarde veranderd.
+
 Merk op dat we opnieuw gepauzeerd zijn aan het begin van de `while`-lus, maar dat dit niet de regel is die `i` heeft aangepast.
-De regel die zonet uitgevoerd was, is de regel die `i` heeft aangepast.
+De regel die net uitgevoerd werd, was de regel die `i` heeft aangepast.
 Aangezien we terug naar het begin van de while-loop zijn gesprongen, moet dit de laatste regel van de lus geweest zijn, dus `i <<= 1`.
 
 `i <<= 1` heeft ervoor gezorgd dat de waarde van `i` van 1 naar 2 is veranderd.
@@ -611,7 +620,7 @@ Een veel snellere aanpak is het programma uit te voeren met een debugger.
 We recompilen het programma met de debugflag `-g` en voeren het uit met `gdb`:
 
 ```bash
-$ gcc linked-list-buggy.c
+$ gcc -g linked-list-buggy.c
 $ gdb a.out
 ```
 
