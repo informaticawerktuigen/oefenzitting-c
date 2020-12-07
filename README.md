@@ -15,6 +15,7 @@
   - [Les 5: Scopes en lifetimes](#les-5-scopes-en-lifetimes)
   - [Les 6: Dynamische structuren](#les-6-dynamische-structuren)
   - [Les 7: Systeeminteractie](#les-7-systeeminteractie)
+  - [Les 8: Debugging](#les-8-debugging)
 
 ## Werkomgeving
 
@@ -94,3 +95,7 @@ We bekijken het concept door de implementatie van lijsten te bestuderen.
 ### Les 7: Systeeminteractie
 
 In [deze les](https://github.com/informaticawerktuigen/oefenzitting-c/tree/main/les7-system-interaction) leren we meer over I/O in C, vanuit de command line of via bestanden.
+
+### Les 8: Debugging
+
+In [deze les](https://github.com/informaticawerktuigen/oefenzitting-c/tree/main/les8-debugging) leer je meer over tools om fouten te zoeken in C-programma's, zoals `gdb`.
