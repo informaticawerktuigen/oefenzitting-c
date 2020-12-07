@@ -9,5 +9,6 @@ int main(void)
         fprintf(stderr, "%s couldn't be created or opened\n", filename);
     }
     fprintf(file, "Hello, world!");
+    fclose(file);
     return 0;
 }
