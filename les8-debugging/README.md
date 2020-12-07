@@ -17,7 +17,7 @@
 
 ## Video
 
-Coming soon
+[![Bekijk de video](https://img.youtube.com/vi/8ExxfhWyA_k/hqdefault.jpg)](https://www.youtube.com/watch?v=8ExxfhWyA_k)
 
 ## Introductie
 
