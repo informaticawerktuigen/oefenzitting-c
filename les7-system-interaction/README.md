@@ -280,6 +280,7 @@ int main(void)
     if (file == NULL)
     {
         fprintf(stderr, "%s couldn't be created or opened\n", filename);
+        return -1;
     }
     fprintf(file, "Hello, world!");
     fclose(file);
