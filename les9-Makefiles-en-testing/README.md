@@ -46,7 +46,7 @@ Het commando `make` zal een `Makefile` standaard uitvoeren door te zoeken naar h
 Laten we bovenstaande `Makefile` eens uittesten:
 
 ```console
-examples/make/simple$ ls
+foo@bar:examples/make/simple$ ls
 Makefile
 foo@bar:examples/make/simple$ make
 echo "Hello, world!" > hello_world
