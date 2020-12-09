@@ -2,6 +2,7 @@
 
 ## Inhoudstafel <!-- omit in toc -->
 
+- [Video](#video)
 - [Introductie](#introductie)
 - [Makefiles](#makefiles)
 	- [Dependencies](#dependencies)
@@ -12,6 +13,11 @@
 - [Tests](#tests)
 	- [Voorbeeldproject: Linked lists](#voorbeeldproject-linked-lists)
 		- [Test suite](#test-suite)
+
+
+## Video
+
+[![Bekijk de video](https://img.youtube.com/vi/tMGpCLuSv3M/hqdefault.jpg)](https://www.youtube.com/watch?v=tMGpCLuSv3M)
 
 ## Introductie
 
