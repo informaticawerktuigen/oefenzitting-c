@@ -16,7 +16,7 @@
   - [Les 6: Dynamische structuren](#les-6-dynamische-structuren)
   - [Les 7: Systeeminteractie](#les-7-systeeminteractie)
   - [Les 8: Debugging](#les-8-debugging)
-  - [Les 9: Makefiles en tests](#les-9-Makefiles-en-tests)
+  - [Les 9: Makefiles en tests](#les-9-makefiles-en-tests)
 
 ## Werkomgeving
 
@@ -101,6 +101,6 @@ In [deze les](https://github.com/informaticawerktuigen/oefenzitting-c/tree/main/
 
 In [deze les](https://github.com/informaticawerktuigen/oefenzitting-c/tree/main/les8-debugging) leer je meer over tools om fouten te zoeken in C-programma's, zoals `gdb`.
 
-### Les 9: Makefile en tests
+### Les 9: Makefiles en tests
 
 In [deze les](https://github.com/informaticawerktuigen/oefenzitting-c/tree/main/les9-Makefiles-en-testing) leer je meer over Makefiles en het schrijven van testen.
