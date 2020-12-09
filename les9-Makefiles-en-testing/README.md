@@ -15,10 +15,9 @@
 
 ## Introductie
 
-Deze les zal gaan over het schrijven van tests.
-Tests worden echter echt pas handig op het moment dat je ze kan automatiseren.
 Een tool die helpt bij automatisatie van compilatie, linking en ook testing van projecten, is de build tool `make`.
-Daarom introduceren we eerst deze tool.
+Deze tool zullen we in deze les introduceren.
+Vervolgens wordt kort gepraat over testen in C en hoe `make` ons kan helpen deze tests te automatiseren.
 
 > :warning: `make` en tests zijn niet direct gerelateerd aan elkaar. In de toekomst zullen dit waarschijnlijk twee aparte lessen worden. Dit jaar hebben we ervoor gekozen om deze kort samen te bespreken.
 
