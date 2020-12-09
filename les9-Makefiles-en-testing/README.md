@@ -24,10 +24,10 @@ Vervolgens wordt kort gepraat over testen in C en hoe `make` ons kan helpen deze
 ## Makefiles
 
 `make` is een programma waarmee automatisch bestanden gegenereerd kunnen worden volgens een voorgeprogrammeerde procedure.
-Indien je een project hebt, waarbij een bepaald bestand verkregen wordt door het uitvoeren van bepaalde commando's, eventueel op andere bestanden, is `make` een zeer goede tool om te gebruiken.
+Indien je een project hebt, waarbij bepaald bestanden automatisch gegenereerd wordt door het uitvoeren van bepaalde commando's op andere bestanden (denk aan compilatie), kan `make` een zeer goede tool om te gebruiken.
+
 `make` werkt op basis van een bestand genaamd de `Makefile`.
 Wanneer we het commando `make` uitvoeren, zal gezocht worden naar een `Makefile`.
-Deze `Makefile` zal vervolgens de commando's en procedures beschrijven die `make` moet uitvoeren om de gevraagde bestanden te genereren.
 
 Laten we starten met een simpel voorbeeld.
 
@@ -41,13 +41,13 @@ hello_world:
 In deze simpele `Makefile` schrijven we een script dat het bestand `hello_world` genereert.
 `hello_world` is een voorbeeld van een *make target*, een bestand dat gegenereerd moet worden door de `Makefile`.
 De manier waarop `hello_world` gegenereerd moet worden, wordt beschreven in het commando eronder :`echo "Hello, world! > $@`.
-In dit commando staat `$@` voor de naam van het target.
+In dit commando zal `$@` worden vervangen door de naam van het target, dus `hello_world`.
 
-Het commando `make` zal een `Makefile` standaard uitvoeren door te zoeken naar het eerste target in de `Makefile` en vervolgens de commando's uit te voeren die horen bij dat target.
+Het commando `make` zal een `Makefile` standaard uitvoeren door te zoeken naar het eerste target en vervolgens de commando's uitvoeren die horen bij dat target.
 
 Laten we bovenstaande `Makefile` eens uittesten:
 
-```bash
+```console
 examples/make/simple$ ls
 Makefile
 examples/make/simple$ make
@@ -58,18 +58,18 @@ examples/make/simple$ cat hello_world
 Hello, world!
 ```
 
-Het commando `make` zal standaard de uitgevoerde commando's printen naar de `stdout`.
-Zo kan je meteen zien welke commando's uitgevoerd zijn.
+`make` zal de commando's die het uitvoert printen naar de `stdout`.
+Zo kan je meteen zien welke commando's uitgevoerd werden.
 Zoals verwacht is een bestand `hello_world` aangemaakt met het `echo` commando.
 
-Stel dat we nu echter `make` nogmaals uitvoeren:
+Stel dat we `make` nogmaals uitvoeren:
 
-```bash
+```console
 examples/make/simple$ make
 make: 'hello_world' is up to date.
 ```
 
-`make` zal het echo-commando niet opnieuw uitvoeren, het bestand bestaat al en is blijkbaar *up to date*.
+`make` zal het echo-commando niet opnieuw uitvoeren, het targetbestand `hello_world` bestaat al en is blijkbaar *up to date*.
 Om uit te leggen wat `make` bedoelt met *up to date*, geven we een iets complexer voorbeeld.
 
 ### Dependencies
@@ -81,14 +81,14 @@ word_count: count_me
 
 Bovenstaande `Makefile` genereert een target file genaamd `word_count`.
 We zien echter een tweede bestand gespecifieerd na de dubbelpunt, namelijk `count_me`.
-`count_me` is een dependecy van `word_count`.
+`count_me`, ook een bestand, is een dependency van `word_count`.
 Dat wil zeggen dat je het bestand `count_me` nodig hebt om `word_count` te genereren.
 
 Het commando zelf voert `wc -w` (telt het aantal woorden) uit op bestand `$<`.
 `$<` zal vervangen worden door de eerste dependency.
 Indien we `make` uitvoeren, zien we:
 
-```bash
+```console
 examples/make/dependency$ ls
 count_me  Makefile
 examples/make/dependency$ cat count_me 
@@ -104,7 +104,7 @@ examples/make/dependency$ cat word_count
 Onze `Makefile` telt dus het aantal woorden in `count_me` en maakt een nieuw bestand `word_count` met deze informatie.
 Indien we opnieuw `make` uitvoeren, zien we hetzelfde resultaat als eerder:
 
-```bash
+```console
 examples/make/dependency$ make
 make: 'word_count' is up to date.
 ```
@@ -113,7 +113,7 @@ make: 'word_count' is up to date.
 `count_me` is namelijk nog steeds hetzelfde bestand, het resultaat zal dus ook niet anders zijn.
 Wanneer we `count_me` echter aanpassen, zal `make` het commando *wel* opnieuw uitvoeren:
 
-```bash
+```console
 examples/make/dependency$ echo "And now?" > count_me
 examples/make/dependency$ cat count_me 
 And now?
@@ -148,7 +148,7 @@ Stel dat we bovenstaande `Makefile` in een lege folder uitvoeren.
 Er is echter een *rule* waarmee `count_me` gegenereerd kan worden.
 `make` zal eerst `count_me` genereren met deze *rule* en pas nadien *word_count* genereren.
 
-```bash
+```console
 examples/make/chains$ ls
 Makefile
 examples/make/chains$ make
@@ -190,7 +190,7 @@ Daarnaast heeft deze `Makefile` een regel die gebruikt maakt van *pattern matchi
 
 Indien we deze `Makefile` uitvoeren in een folder met de bestanden `1.countme`, `2.countme` en `3.countme` zullen de overeenkomstige `.counted` bestanden automatisch gegenereerd worden:
 
-```bash
+```console
 examples/make/patterns$ ls
 1.countme  2.countme  3.countme  Makefile
 examples/make/patterns$ make
@@ -208,7 +208,7 @@ examples/make/patterns$ ls
 Bovenstaande `Makefile` werkt enkel door de verschillende `.counted` targets te hardcoden.
 Met behulp van het commando `find` zouden we echter automatisch alle bestanden die eindigen op `.countme` kunnen vinden:
 
-```bash
+```console
 examples/make/variables$ find ./ -name "*.countme"
 ./3.countme
 ./2.countme
@@ -276,7 +276,7 @@ clean:
 
 Deze `Makefile` compileert *alle* `.c` files in een folder en linkt deze samen tot een executable genaamd `my_executable`:
 
-```bash
+```console
 examples/make/c$ ls
 carthesian.c  carthesian.h  main.c  Makefile  print.c  print.h
 examples/make/c$ make
@@ -290,7 +290,7 @@ carthesian.c  carthesian.h  carthesian.o  main.c  main.o  Makefile  my_executabl
 
 Het `clean` target is een standaard `PHONY` target (genereert dus zelf geen bestand) dat gebruikt kan worden om alle automatisch gegenereerde bestanden automatisch te verwijderen:
 
-```bash
+```console
 examples/make/c$ ls
 carthesian.c  carthesian.h  carthesian.o  main.c  main.o  Makefile  my_executable  print.c  print.h  print.o
 examples/make/c$ make clean
@@ -391,7 +391,7 @@ status list_append(struct List *list, int value)
 
 Indien we nu ons project builden met `make`, zien we dit resultaat:
 
-```bash
+```console
 examples/unit-tests$ make
 gcc -c lib/linked-list.c -o lib/linked-list.o -Wall -Werror -std=c17 -pedantic
 ar rcs liblinkedlist.a lib/linked-list.o
