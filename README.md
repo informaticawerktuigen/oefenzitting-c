@@ -16,6 +16,7 @@
   - [Les 6: Dynamische structuren](#les-6-dynamische-structuren)
   - [Les 7: Systeeminteractie](#les-7-systeeminteractie)
   - [Les 8: Debugging](#les-8-debugging)
+  - [Les 9: Makefiles en tests](#les9-Makefiles-en-testing)
 
 ## Werkomgeving
 
