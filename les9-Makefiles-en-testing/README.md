@@ -471,4 +471,4 @@ Daarnaast illustreert dit voorbeeldproject nogmaals hoe een `Makefile` handig ge
 
 > **:question: Lees de code van de test suite om te kijken hoe je functies kan testen in C. Kijk hoe het voorbeeldproject werkt en voeg expres kleine fouten toe aan de voorbeeldimplementatie van de linked list. Kijk hoe de test suite deze fouten opvangt door na fouten te introduceren het project opnieuw te builden met `make`**
 
-> **:question: Kan je een fout introduceren in de linked list library die onze testsuite niet detecteerd? Indien dit lukt, pas dan de test suite aan om ook deze fout te detecteren.**
+> **:question: Kan je een fout introduceren in de linked list library die onze testsuite niet kan detecteren? Indien dit lukt, pas dan de test suite aan om ook deze fout te detecteren.**
