@@ -31,8 +31,6 @@ Wanneer we het commando `make` uitvoeren, zal gezocht worden naar een `Makefile`
 
 Laten we starten met een simpel voorbeeld.
 
-`examples/make/simple/Makefile`
-
 ```Makefile
 hello_world:
 	echo "Hello, world!" > $@
@@ -50,11 +48,11 @@ Laten we bovenstaande `Makefile` eens uittesten:
 ```console
 examples/make/simple$ ls
 Makefile
-examples/make/simple$ make
+foo@bar:examples/make/simple$ make
 echo "Hello, world!" > hello_world
-examples/make/simple$ ls
+foo@bar:examples/make/simple$ ls
 hello_world  Makefile
-examples/make/simple$ cat hello_world 
+foo@bar:examples/make/simple$ cat hello_world 
 Hello, world!
 ```
 
@@ -65,7 +63,7 @@ Zoals verwacht is een bestand `hello_world` aangemaakt met het `echo` commando.
 Stel dat we `make` nogmaals uitvoeren:
 
 ```console
-examples/make/simple$ make
+foo@bar:examples/make/simple$ make
 make: 'hello_world' is up to date.
 ```
 
@@ -89,15 +87,15 @@ Het commando zelf voert `wc -w` (telt het aantal woorden) uit op bestand `$<`.
 Indien we `make` uitvoeren, zien we:
 
 ```console
-examples/make/dependency$ ls
+foo@bar:examples/make/dependency$ ls
 count_me  Makefile
-examples/make/dependency$ cat count_me 
+foo@bar:examples/make/dependency$ cat count_me 
 How many words does this file contain?
-examples/make/dependency$ make
+foo@bar:examples/make/dependency$ make
 wc -w count_me > word_count
-examples/make/dependency$ ls
+foo@bar:examples/make/dependency$ ls
 count_me  Makefile  word_count
-examples/make/dependency$ cat word_count 
+foo@bar:examples/make/dependency$ cat word_count 
 7 count_me
 ```
 
@@ -114,12 +112,12 @@ make: 'word_count' is up to date.
 Wanneer we `count_me` echter aanpassen, zal `make` het commando *wel* opnieuw uitvoeren:
 
 ```console
-examples/make/dependency$ echo "And now?" > count_me
-examples/make/dependency$ cat count_me 
+foo@bar:examples/make/dependency$ echo "And now?" > count_me
+foo@bar:examples/make/dependency$ cat count_me 
 And now?
-examples/make/dependency$ make
+foo@bar:examples/make/dependency$ make
 wc -w count_me > word_count
-examples/make/dependency$ cat word_count 
+foo@bar:examples/make/dependency$ cat word_count 
 2 count_me
 ```
 
@@ -149,12 +147,12 @@ Er is echter een *rule* waarmee `count_me` gegenereerd kan worden.
 `make` zal eerst `count_me` genereren met deze *rule* en pas nadien *word_count* genereren.
 
 ```console
-examples/make/chains$ ls
+foo@bar:examples/make/chains$ ls
 Makefile
-examples/make/chains$ make
+foo@bar:examples/make/chains$ make
 echo "Try to count this!" > count_me
 wc -w count_me > word_count
-examples/make/chains$ ls
+foo@bar:examples/make/chains$ ls
 count_me  Makefile  word_count
 ```
 
@@ -191,13 +189,13 @@ Daarnaast heeft deze `Makefile` een regel die gebruikt maakt van *pattern matchi
 Indien we deze `Makefile` uitvoeren in een folder met de bestanden `1.countme`, `2.countme` en `3.countme` zullen de overeenkomstige `.counted` bestanden automatisch gegenereerd worden:
 
 ```console
-examples/make/patterns$ ls
+foo@bar:examples/make/patterns$ ls
 1.countme  2.countme  3.countme  Makefile
-examples/make/patterns$ make
+foo@bar:examples/make/patterns$ make
 wc -w 1.countme > 1.counted
 wc -w 2.countme > 2.counted
 wc -w 3.countme > 3.counted
-examples/make/patterns$ ls
+foo@bar:examples/make/patterns$ ls
 1.counted  1.countme  2.counted  2.countme  3.counted  3.countme  Makefile
 ```
 
@@ -209,7 +207,7 @@ Bovenstaande `Makefile` werkt enkel door de verschillende `.counted` targets te 
 Met behulp van het commando `find` zouden we echter automatisch alle bestanden die eindigen op `.countme` kunnen vinden:
 
 ```console
-examples/make/variables$ find ./ -name "*.countme"
+foo@bar:examples/make/variables$ find ./ -name "*.countme"
 ./3.countme
 ./2.countme
 ./1.countme
@@ -277,25 +275,25 @@ clean:
 Deze `Makefile` compileert *alle* `.c` files in een folder en linkt deze samen tot een executable genaamd `my_executable`:
 
 ```console
-examples/make/c$ ls
+foo@bar:examples/make/c$ ls
 carthesian.c  carthesian.h  main.c  Makefile  print.c  print.h
-examples/make/c$ make
+foo@bar:examples/make/c$ make
 gcc -c carthesian.c -Wall -Werror -std=c17 -pedantic
 gcc -c print.c -Wall -Werror -std=c17 -pedantic
 gcc -c main.c -Wall -Werror -std=c17 -pedantic
 gcc carthesian.o print.o main.o -o my_executable -lm
-examples/make/c$ ls
+foo@bar:examples/make/c$ ls
 carthesian.c  carthesian.h  carthesian.o  main.c  main.o  Makefile  my_executable  print.c  print.h  print.o
 ```
 
 Het `clean` target is een standaard `PHONY` target (genereert dus zelf geen bestand) dat gebruikt kan worden om alle automatisch gegenereerde bestanden automatisch te verwijderen:
 
 ```console
-examples/make/c$ ls
+foo@bar:examples/make/c$ ls
 carthesian.c  carthesian.h  carthesian.o  main.c  main.o  Makefile  my_executable  print.c  print.h  print.o
-examples/make/c$ make clean
+foo@bar:examples/make/c$ make clean
 rm -f my_executable ./carthesian.o ./print.o ./main.o
-examples/make/c$ ls
+foo@bar:examples/make/c$ ls
 carthesian.c  carthesian.h  main.c  Makefile  print.c  print.h
 ```
 
@@ -392,7 +390,7 @@ status list_append(struct List *list, int value)
 Indien we nu ons project builden met `make`, zien we dit resultaat:
 
 ```console
-examples/unit-tests$ make
+foo@bar:examples/unit-tests$ make
 gcc -c lib/linked-list.c -o lib/linked-list.o -Wall -Werror -std=c17 -pedantic
 ar rcs liblinkedlist.a lib/linked-list.o
 gcc test/linked-list-tests.o liblinkedlist.a -o test_suite 
