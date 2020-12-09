@@ -156,7 +156,7 @@ foo@bar:examples/make/chains$ ls
 count_me  Makefile  word_count
 ```
 
-Merk op dat `make` dus *chains* maakt van dependency.
+Merk op dat `make` dus *chains* (kettingen0 maakt van dependencies.
 
 > :information_source: Om een executable te maken op basis van `.c` broncode voer je typisch twee stappen uit. Compileer de `.c` files naar `.o` files, en link vervolgens de `.o` files tot een executable. Deze procedure is met `make` eenvoudig te automatiseren met behulp van chains.
 
@@ -176,15 +176,17 @@ count: 1.counted 2.counted 3.counted
 ```
 
 Deze `Makefile` heeft 1 target: `count`.
-`count` is echter een `PHONY` target, dat wil zeggen dat we geen bestand zullen genereren met de naam `count`.
-Dit `PHONY` target heeft enkel een lijst van dependencies: `1.counted`, `2.counted` en `3.counted`.
-Hier passen we een handig truukje toe.
-Aangezien alle dependencies van een target gegenereerd moeten worden, zorgt dit ervoor dat `1.counted`, `2.counted` en `3.counted` gegenereerd zullen worden.
+`count` is echter een `PHONY` target.
+Hiermee geven we aan dat we geen bestand willen genereren met de naam `count`, we willen enkel de commando's van het target uitvoeren.
+Dit target heeft echter ook geen bijhorende commando's.
+
+Het `PHONY` target heeft wel een lijst van dependencies: `1.counted`, `2.counted` en `3.counted`.
+Aangezien alle dependencies van een target gegenereerd moeten worden, zorgt het `.PHONY` target ervoor dat `1.counted`, `2.counted` en `3.counted` gegenereerd zullen worden.
 Zonder een `PHONY` target te gebruiken hadden we drie aparte targets moeten opstellen.
 
-Daarnaast heeft deze `Makefile` een regel die gebruikt maakt van *pattern matching*.
+Verder heeft deze `Makefile` een regel die gebruikt maakt van *pattern matching*.
 `%.counted` matcht met elk bestand dat eindigt op `.counted`.
-`%.counted: %.countme` wil zeggen dat om een bestand met de extensie `.counted` te genereren, we als dependency een bestand met dezelfde naam hebben, maar dan met extensie `%.countme`.
+Met `%.counted: %.countme` zeggen we dat, om een bestand met de extensie `.counted` te genereren, we als dependency een bestand met dezelfde naam hebben, maar dan met extensie `%.countme`.
 
 Indien we deze `Makefile` uitvoeren in een folder met de bestanden `1.countme`, `2.countme` en `3.countme` zullen de overeenkomstige `.counted` bestanden automatisch gegenereerd worden:
 
@@ -199,12 +201,12 @@ foo@bar:examples/make/patterns$ ls
 1.counted  1.countme  2.counted  2.countme  3.counted  3.countme  Makefile
 ```
 
-> **:question: Een pattern die je vaak zal tegenkomen in de `Makefile` van een C-project is `%.o: %.c`. Begrijp je nu wat dit betekent?**
+> **:question: Een pattern dat je vaak zal tegenkomen in de `Makefile` van een C-project is `%.o: %.c`. Begrijp je nu wat dit betekent?**
 
 ### Variables
 
 Bovenstaande `Makefile` werkt enkel door de verschillende `.counted` targets te hardcoden.
-Met behulp van het commando `find` zouden we echter automatisch alle bestanden die eindigen op `.countme` kunnen vinden:
+Met behulp van het commando `find` kunnen we echter automatisch alle bestanden die eindigen op `.countme` vinden:
 
 ```console
 foo@bar:examples/make/variables$ find ./ -name "*.countme"
@@ -219,7 +221,7 @@ We kunnen dit commando rechtstreeks vanuit een `Makefile` gebruiken:
 INPUT_FILES := $(shell find ./ -name "*.countme")
 ```
 
-Dit definieert een variabele `INPUT_FILES` op basis van het resultaat van het shellcommando gespecifieerd met `$(shell <commando>)`.
+Deze regel definieert een variabele `INPUT_FILES` op basis van het resultaat van het shellcommando gespecifieerd met `$(shell <commando>)`.
 In de folder `examples/make/variables` zal `INPUT_FILES` dus gelijk zijn aan `./3.countme ./2.countme ./1.countme`.
 
 Dit zijn echter onze dependencies, niet onze targets.
@@ -245,7 +247,18 @@ count: $(TARGETS)
 	wc -w $< > $@
 ```
 
-Deze `Makefile` zal *alle* bestanden met extensie `*.countme` omzetten naar bestanden met extensie `*.counted` door het `wc -w` commando te gebruiken.
+Deze `Makefile` zal *alle* bestanden met extensie `*.countme` omzetten naar bestanden met extensie `*.counted` door het `wc -w` commando te gebruiken:
+
+```console
+foo@bar:examples/make/variables$ ls
+1.countme  2.countme  3.countme  Makefile
+foo@bar:examples/make/variables$ make
+wc -w 3.countme > 3.counted
+wc -w 2.countme > 2.counted
+wc -w 1.countme > 1.counted
+foo@bar:examples/make/variables$ ls
+1.counted  1.countme  2.counted  2.countme  3.counted  3.countme  Makefile
+```
 
 ### C Makefile
 
