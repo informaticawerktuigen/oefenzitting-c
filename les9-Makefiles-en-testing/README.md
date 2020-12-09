@@ -105,7 +105,7 @@ Onze `Makefile` telt dus het aantal woorden in `count_me` en maakt een nieuw bes
 Indien we opnieuw `make` uitvoeren, zien we hetzelfde resultaat als eerder:
 
 ```console
-:examples/make/dependency$ make
+foo@bar:examples/make/dependency$ make
 make: 'word_count' is up to date.
 ```
 
