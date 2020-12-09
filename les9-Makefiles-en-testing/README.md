@@ -124,13 +124,13 @@ foo@bar:examples/make/dependency$ cat word_count
 Merk dus op dat `make` kijkt naar de *dependencies* om te beslissen of het commando opnieuw uitgevoerd moet worden.
 Indien de dependencies niet gewijzigd zijn sinds de laatste uitvoering van `make`, zal het commando niet opnieuw uitgevoerd moeten worden.
 `make` doet dit door te kijken naar de datum van de laatste aanpassing van een bestand.
-Indien een dependecy aangepast werd na de laatste wijziging van de target, zal de target opnieuw gegenereerd worden.
+Indien een dependency aangepast werd na de laatste wijziging van de target, zal de target opnieuw gegenereerd worden.
 
 > :information_source: Indien je `make` gebruikt om C code te compileren, wil je dat telkens wanneer een `.c` bestand gewijzigd wordt, het overeenkomstige `.o` bestand ook opnieuw gegenereerd wordt.
 
 ### Chains
 
-Indien een *dependency* niet bestaat, zal `make` proberen om deze dependecy te genereren.
+Indien een *dependency* niet bestaat, zal `make` proberen om deze dependency te genereren.
 `make` gaat kijken of er in de `Makefile` een *regel* staat over hoe dit bestand gegenereerd kan worden.
 
 ```Makefile
@@ -156,7 +156,7 @@ foo@bar:examples/make/chains$ ls
 count_me  Makefile  word_count
 ```
 
-Merk op dat `make` dus *chains* maakt van dependecy.
+Merk op dat `make` dus *chains* maakt van dependency.
 
 > :information_source: Om een executable te maken op basis van `.c` broncode voer je typisch twee stappen uit. Compileer de `.c` files naar `.o` files, en link vervolgens de `.o` files tot een executable. Deze procedure is met `make` eenvoudig te automatiseren met behulp van chains.
 
