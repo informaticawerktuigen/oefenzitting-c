@@ -23,7 +23,7 @@
 
 Fouten opsporen in een C programma kan lastig zijn.
 Een kleine fout in je code kan leiden tot een perfect werkend programma, dat toch volledig anders uitvoert dan je zou verwachten.
-Om te achterhalen waar de fout net zit, is zeker niet eenvoudig.
+Achterhalen waar de fout net zit, is zeker niet eenvoudig.
 
 Neem nu een zeer simpel voorbeeld.
 Onderstaand programma wil elk element van een array printen, en daarnaast ook de buren van elk array element.
@@ -98,7 +98,7 @@ Indien je ongeveer weet waar een fout zich voordoet, kan het toevoegen van een p
 Laten we print-debugging eens uitproberen op ons buggy programma van de introductie.
 Misschien had je al wel het vermoeden dat de code crasht in één van de twee `if`-cases.
 Er wordt namelijk maar één iteratie uitgevoerd van de for-loop, alvorens de start van de tweede iteratie, crasht het programma.
-Dat zien we aan het feit dat de initiële print-statement maar één keer wordt uitgevoerd.
+Dat zien we aan het feit dat het initiële print-statement maar één keer wordt uitgevoerd.
 
 Loopt er dus misschien iets mis met de waarde van `i`?
 Laten we eens een print-statement plaatsen in beide cases:
@@ -234,7 +234,7 @@ Door gebruik te maken van een debugger kunnen we het probleem veel sneller achte
 
 Laten we onze code compileren met de debugflag `-g`.
 Deze flag zorgt ervoor dat `gcc` debuginformatie in de gegenereerde executable verwerkt.
-Onder andere de C-broncode wordt mee in de executable bewaard.
+Onder andere referenties naar de C-broncode worden mee in de executable bewaard.
 Hierdoor kan een debugger tonen welke broncode ervoor gezorgd heeft dat een fout zich voordeed.
 
 > :warning: Je kan debuggen zonder `-g` executable, maar indien je de mogelijkheid hebt om de `-g` flag te gebruiken, zal dit het een stuk eenvoudiger maken. Zonder `-g` zal je enkel namen van functies en machinecode te zien krijgen.
@@ -271,7 +271,7 @@ Program received signal SIGBUS, Bus error.
 ```
 
 We krijgen al een stuk meer informatie vergeleken met een normale uitvoering van het programma.
-`gdb` toont ons dat lijn 15 in de broncode ervoor zorgde dat ons programma crasht.
+`gdb` toont ons dat lijn 15 in de broncode ervoor zorgt dat ons programma crasht.
 Dit simpele commando geeft ons dus al evenveel info als alle print-statements die we eerder geplaatst hebben om te achterhalen waar de crash zich voordeed.
 
 We kunnen vervolgens proberen te achterhalen wat de reden is van de crash.
@@ -288,7 +288,7 @@ $2 = 4294967295
 
 We hebben nu dus alle informatie gevonden die we eerder reeds achterhaald hadden met print statements, maar op een veel snellere en efficiëntere manier.
 We moesten onze broncode niet aanpassen om print statements toe te voegen en zo de fout te zoeken.
-Op het moment dat we de fout vonden moesten we ons ook niet bezig houden met het verwijderen van alle onnodige print-statements.
+Op het moment dat we de fout vonden, moesten we ons ook niet bezig houden met het verwijderen van alle onnodige print-statements.
 
 Simpelweg het programma een keertje uitvoeren in de debugger bleek voldoende te zijn.
 
