@@ -124,9 +124,11 @@ foo@bar:examples/make/dependency$ cat word_count
 Merk dus op dat `make` kijkt naar de *dependencies* om te beslissen of het commando opnieuw uitgevoerd moet worden.
 Indien de dependencies niet gewijzigd zijn sinds de laatste uitvoering van `make`, zal het commando niet opnieuw uitgevoerd moeten worden.
 `make` doet dit door te kijken naar de datum van de laatste aanpassing van een bestand.
-Indien een dependency aangepast werd na de laatste wijziging van de target, zal de target opnieuw gegenereerd worden.
+Indien een dependency aangepast werd na de laatste wijziging van de target, zal het target opnieuw gegenereerd worden.
 
 > :information_source: Indien je `make` gebruikt om C code te compileren, wil je dat telkens wanneer een `.c` bestand gewijzigd wordt, het overeenkomstige `.o` bestand ook opnieuw gegenereerd wordt.
+
+> **:question: Schrijf een Makefile die een bestand `line_count` aanmaakt met daarin het aantal lijnen van een inputbestand. Genereer het bestand met `make`, voeg nadien een lijn toe aan het inputbestand en voer `make` opnieuw uit.**
 
 ### Chains
 
@@ -156,7 +158,7 @@ foo@bar:examples/make/chains$ ls
 count_me  Makefile  word_count
 ```
 
-Merk op dat `make` dus *chains* (kettingen0 maakt van dependencies.
+Merk op dat `make` dus *chains* (kettingen) maakt van dependencies.
 
 > :information_source: Om een executable te maken op basis van `.c` broncode voer je typisch twee stappen uit. Compileer de `.c` files naar `.o` files, en link vervolgens de `.o` files tot een executable. Deze procedure is met `make` eenvoudig te automatiseren met behulp van chains.
 
@@ -259,6 +261,8 @@ wc -w 1.countme > 1.counted
 foo@bar:examples/make/variables$ ls
 1.counted  1.countme  2.counted  2.countme  3.counted  3.countme  Makefile
 ```
+
+> **:question: Schrijf een `Makefile` die voor elk bestand met extensie `.countlines` een gelijknamig outputbestand genereert met extensie `.countedlines`. In het outputbestand wordt het aantal lijnen van het invoerbestand bewaard.**
 
 ### C Makefile
 
