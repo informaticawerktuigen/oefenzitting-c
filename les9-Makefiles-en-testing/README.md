@@ -30,9 +30,9 @@ Vervolgens wordt kort gepraat over testen in C en hoe `make` ons kan helpen deze
 ## Makefiles
 
 `make` is een programma waarmee automatisch bestanden gegenereerd kunnen worden volgens een voorgeprogrammeerde procedure.
-Indien je een project hebt, waarbij bepaald bestanden automatisch gegenereerd wordt door het uitvoeren van bepaalde commando's op andere bestanden (denk aan compilatie), kan `make` een zeer goede tool om te gebruiken.
+Indien je een project hebt, waarbij bepaalde bestanden automatisch gegenereerd worden door het uitvoeren van bepaalde commando's op andere bestanden (denk aan compilatie), kan `make` een zeer goede tool zijn om te gebruiken.
 
-`make` werkt op basis van een bestand genaamd de `Makefile`.
+`make` werkt op basis van een bestand genaamd `Makefile`.
 Wanneer we het commando `make` uitvoeren, zal gezocht worden naar een `Makefile`.
 
 Laten we starten met een simpel voorbeeld.
@@ -43,7 +43,7 @@ hello_world:
 ```
 
 In deze simpele `Makefile` schrijven we een script dat het bestand `hello_world` genereert.
-`hello_world` is een voorbeeld van een *make target*, een bestand dat gegenereerd moet worden door de `Makefile`.
+`hello_world` is een voorbeeld van een *make target*, een bestand dat gegenereerd moet worden door `make` op basis van de `Makefile`.
 De manier waarop `hello_world` gegenereerd moet worden, wordt beschreven in het commando eronder :`echo "Hello, world! > $@`.
 In dit commando zal `$@` worden vervangen door de naam van het target, dus `hello_world`.
 
@@ -338,7 +338,7 @@ Geef voorbeeldinputs en controleer of de functies de verwachtte resultaten terug
 Indien je dit consequent doet voor al je functies, zal je veel minder frequent tegen fouten aanlopen.
 
 De tests kan je vervolgens op regelmatige basis uitvoeren, bijvoorbeeld na elke compilatie opnieuw.
-Wanneer je code aanpast kan een goede test suite je meteen vertellen welk deel van je programma niet meer werkt, en vaak ook waarom.
+Wanneer je code aanpast, kan een goede test suite je meteen vertellen welk deel van je programma niet meer werkt, en vaak ook waarom.
 
 ### Voorbeeldproject: Linked lists
 
