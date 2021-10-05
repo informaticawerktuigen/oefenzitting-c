@@ -262,7 +262,7 @@ We komen hier in toekomstige sessies zeker op terug.
 
 ### Functiedefinities
 
-C (de opgvolger van de taal programmeertaal B [[1]](https://en.wikipedia.org/wiki/C_(programming_language))) is een zeer oude taal, ontwikkeld in 1972 en 1973.
+C (de opvolger van de programmeertaal B [[1]](https://en.wikipedia.org/wiki/C_(programming_language))) is een zeer oude taal, ontwikkeld in 1972 en 1973.
 De machines waarop C compilers vroeger werkten hadden niet veel geheugen.
 Dat had invloed op de manier waarop C gecompileerd werd.
 
