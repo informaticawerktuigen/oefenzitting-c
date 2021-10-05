@@ -145,7 +145,7 @@ int main(void)
 
 > :bulb: Merk op dat elke regel in C wordt beëindigt door een `;` en elke blok code wordt omvat tussen `{` en `}`. De C-syntax is zeer strikt. Indien je een fout maakt zal de C-compiler je programma niet vertalen.
 
-* Compileer en voer het bovenstaande programma uit. Verifieer dat de exit-code van het programma gelijk is aan de som van de getallen `1..10`.
+* **Oefening** Compileer en voer het bovenstaande programma uit. Verifieer dat de exit-code van het programma gelijk is aan de som van de getallen `1..10`.
 
 ### Variabelen in C
 
