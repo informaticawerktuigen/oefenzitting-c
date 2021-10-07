@@ -49,7 +49,7 @@ Het meest voorkomende commando is `#include`.
 Het `#include` commando wordt gevolgd door een bestandsnaam.
 Wanneer de preprocessor `#include "<filename>"` tegenkomt zal de preprocessor deze regel vervangen door de volledige inhoud van het meegegeven bestand.
 
-Om dit te illustreren kijken we naar de de bestanden in de folder `les2-c-tools/src/preprocessor`.
+Om dit te illustreren kijken we naar de bestanden in de folder `les2-c-tools/src/preprocessor`.
 
 `main.c`
 
@@ -272,7 +272,7 @@ De compiler genereert geen executable bestanden (dat doet de linker), maar objec
 Bestanden met de extensie `.o` op Linux zijn object files.
 Deze bestanden bevatten de machinecodevertaling van een compilation unit, maar zijn geen uitvoerbare bestanden.
 
-Eén belangrijk verschil tussen een executable en een `.o`-file is dat een `.o`-file functiedeclaraties kan bevatten zonder de overeenkomstige functiedefinitie.
+Eén belangrijk verschil tussen een executable en een `.o`-file is dat een `.o`-file verwijzigingen of 'referenties' naar functies kan bevatten zonder de bijhorende machinecode van deze functies.
 
 Laten we dit meteen expliciet maken.
 In de folder `les2-c-tools/src/compiler` zit opnieuw het bestand `functions.c`.
@@ -601,8 +601,9 @@ Daarom deze beknopte samenvatting van de zaken die we zonet hebben besproken.
 Het vertalen van een C programma, mogelijks bestaand uit meerdere `.c` en `.h` bestanden, gebeurt als volgt:
 
 1. De preprocessor verwerkt alle preprocessor commando's (startend met `#`) en genereert een compilation unit (compilatie-eenheid);
-2. De compiler vertaalt deze compilatie-eenheid naar machinecode (output: `.o` bestanden); mogelijks zijn functies hierin enkel gedeclareerd en niet gedefinieerd
-3. De linker genereert een uitvoerbaar bestand door `.o` files met elkaar te combineren (output: `ELF` bestand). Het is nog steeds mogelijk dat hierin bepaalde library-functies niet geïmplementeerd zijn, indien deze *dynamisch gelinked* zijn.
+2. De compiler vertaalt deze compilatie-eenheid naar machinecode (output: `.o` bestanden). Het is mogelijk dat het `.o` bestand verwijst naar functies waarvan
+de machinecode niet aanwezig is in hetzelfde `.o` bestand.
+3. De linker genereert een uitvoerbaar bestand door `.o` files met elkaar te combineren (output: `ELF` bestand). Het is nog steeds mogelijk dat hierin de machinecode van library-functies niet aanwezig is, indien deze *dynamisch gelinked* zijn.
 4. De loader start een programma door de machinecode van een bestand in het werkgeheugen te laden en zorgt op dat moment voor dat dynamisch gelinkte libraries ook ingeladen worden.
 
 Het begrip van deze verschillende stappen is belangrijk bij het schrijven van C-programma's.
