@@ -81,7 +81,7 @@ Deze definities werken dus recursief.
 
 ### Adresoperator
 
-Nu je weet wat het pointertype betekent vraag je jezelf misschien af: hoe kom je nu aan geheugenadressen?
+Nu je weet wat het pointertype betekent, vraag je jezelf misschien af: hoe kom je nu aan geheugenadressen?
 
 Om het adres van een variabele te vinden gebruiken we de *adress operator* `&`.
 Het resultaat kunnen we bewaren in een pointer.
@@ -108,11 +108,11 @@ int main(void)
 ## Pointer dereference
 
 Pointers bevatten geheugenadressen.
-Op die geheugenadressen staat data.
-Deze data kan opgevraagd worden door middel van de pointer.
+Op die geheugenadressen staan data.
+Deze data kunnen opgevraagd worden door middel van de pointer.
 Dit doen we met de *dereference operator* `*`.
 
-> :warning: Merk op dat we `*` ook gebruiken in de naam van een datatype, bij het declareren van een variabele. C gebruikt `*` daarnaast ook als dereference operator. Dit kan verwarrend zijn. Probeer goed het verschil te begrijpen.
+> :warning: Merk op dat we `*` ook gebruiken in de naam van een pointer datatype, bij het declareren van een variabele. C gebruikt `*` niet alleen voor de vermenigvuldiging maar ook als dereference operator. Dit kan verwarrend zijn. Probeer goed de verschillen te begrijpen.
 
 Laten we ons vorige programma lichtjes uitbreiden.
 
@@ -140,7 +140,7 @@ int main(void)
 Merk op dat we de waarde van `p` niet aanpassen.
 Het bewaarde adres in `p` blijft hetzelfde.
 Met `*p` voeren we een dereference uit van de variabele `p`.
-`*p = 10` schrijft dus de waarde `10` naar het adres dat opgeslagen is in `p`.
+`*p = 10` schrijft dus de waarde `10` naar de locatie in het geheugen waarvan het adres opgeslagen is in `p`.
 
 > **:question: Vervang de regel `*p = 10` in bovenstaand programma door `p = 10`. Compileer het programma en voer uit. Loopt alles goed?**
 
@@ -399,4 +399,4 @@ Dit noemen we padding.
 
 > **:question: Gebruik de sizeof operator om te achterhalen of bovenstaande struct gebruik maakt van padding.**
 
-> **:question: Schrijf een programma waarin een struct gedefinieerd wordt die de x- en y-coördinaten van een punt bewaren. Schrijf vervolgens een functie die de [manhattan distance](https://en.wikipedia.org/wiki/Taxicab_geometry) (`|x1 - x2| + |y1 - y2|`) tussen twee punten berekent, gebruik makend van dit struct type.**
+> **:question: Schrijf een programma waarin een struct gedefinieerd wordt die de x- en y-coördinaten van een punt bewaart. Schrijf vervolgens een functie die de [manhattan distance](https://en.wikipedia.org/wiki/Taxicab_geometry) (`|x1 - x2| + |y1 - y2|`) tussen twee punten berekent, gebruik makend van dit struct type.**
