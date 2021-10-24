@@ -7,7 +7,7 @@
 - [Blokken code](#blokken-code)
   - [Functiedefinities](#functiedefinities)
 - [Globale scope](#globale-scope)
-- [Dynamische levensduur](#dynamische-levensduur)
+- [Dynamische geheugenallocatie](#dynamische-levensduur)
   - [malloc](#malloc)
   - [free](#free)
   - [Out of memory](#out-of-memory)
@@ -30,8 +30,8 @@ Alles tussen deze accolades vormt 1 blok.
 
 Blokken code hebben rechtstreeks invloed op de levensduur en de scope van een variabele:
 
-1. Een variabele is enkel zichtbaar (*in scope*) in de blok code waarin de variabele gedefinieerd wordt, in en alle geneste blokken/subblokken van deze blok.
-2. Indien je een variabele op een standaard manier (zonder `static`) definieert in een blok code, bestaat deze variabele enkel tot het einde van deze blok. De variabele heeft een *automatische levensduur* die eindigt wanneer de blok eindigt.
+1. Een variabele is enkel zichtbaar (*in scope*) in het blok code waarin de variabele gedefinieerd wordt, in en alle geneste blokken/subblokken van deze blok.
+2. Indien je een variabele op een standaard manier (zonder `static`) definieert in een blok code, bestaat deze variabele enkel tot het einde van deze blok. De variabele heeft een *automatische levensduur* die eindigt wanneer het blok eindigt.
 
 We geven een voorbeeld.
 
@@ -52,12 +52,12 @@ Je krijgt een foutboodschap te zien: `a`  is niet gedeclareerd in de functie `ma
 Er zijn hier in feite twee problemen:
 
 1. `a` wordt aangemaakt in een blok code.
-Op het moment dat de blok eindigt, stopt `a` met bestaan, want `a` heeft een *automatische levensduur*;
-2. `a` is niet zichtbaar in de regel code met de return-statement. `a` is namelijk niet in dezelfde blok gedefinieerd, noch in een omsluitende blok.
+Op het moment dat het blok eindigt, stopt `a` met bestaan, want `a` heeft een *automatische levensduur*;
+2. `a` is niet zichtbaar (niet "in scope") in de regel code met het return-statement. `a` is namelijk niet in hetzelfde blok gedefinieerd, noch in een omsluitend blok.
 
-> :bulb: Je kan de accolades beschouwen als een soort éénrichtingsgordijn. Het is mogelijk om van binnen (tussen de accolades) naar buiten te kijken, en dus de variabelen te zien in omsluitende blokken. Omgekeerd is echter niet mogelijk. Code buiten de blok kan niet naar binnen kijken.
+> :bulb: Je kan de accolades beschouwen als een soort éénrichtingsgordijn. Het is mogelijk om van binnen (tussen de accolades) naar buiten te kijken, en dus de variabelen te zien in omsluitende blokken. Omgekeerd is echter niet mogelijk. Code buiten het blok kan niet naar binnen kijken.
 
-Merk op dat dit geldt voor elke blok code die je schrijft. Onderstaande code vertoont exact hetzelfde probleem:
+Merk op dat dit geldt voor elke blok code dat je schrijft. Onderstaande code vertoont exact hetzelfde probleem:
 
 ```C
 int main(void)
@@ -71,8 +71,8 @@ int main(void)
 ```
 
 Misschien denken we dat we de compiler te slim af kunnen zijn.
-Vorige les hebben we namelijk geleerd over pointers, die geheugenadressen bevatten.
-Wat als we een pointer `p` aanmaken in de blok van `main` en vervolgens in onze geneste blok code in `p` het adres bewaren van de lokale variabele `a`.
+Vorige les hebben we namelijk geleerd over pointers, variabelen die geheugenadressen bevatten.
+Wat als we een pointer `p` aanmaken in het blok van `main` en vervolgens in ons genest blok het adres van de lokale variabele `a` in `p` bewaren.
 We kunnen daarna toch gewoon de waarde van `a` uitlezen met behulp van het adres in `p`?
 
 * Bekijk onderstaande code en voer uit
@@ -124,13 +124,13 @@ Het gedrag van het programma is namelijk *undefined*.
 Een adres aanspreken van een variabele die niet (meer) bestaat is *undefined behavior*.
 
 > :information_source: Met de flag `-03` zeg je tegen `gcc` dat de gegenereerde code geoptimalizeerd mag worden om ze zo snel mogelijk uit te voeren.
-`gcc` is een slimme compiler die zal zien dat de gehele codeblok die we geschreven hebben in feite helemaal niets doet.
+`gcc` is een slimme compiler die zal zien dat het hele blok code dat we geschreven hebben in feite helemaal niets doet.
 `p` start met een niet-geïnitialiseerde waarde en eindigt met een niet-geïnitialiseerde waarde.
 Een niet-geïnitialiseerd adres aanspreken kan eender welk resultaat teruggeven.
 In plaats van effectief een geheugenoperatie uit te voeren, kiest `gcc` dus om gewoon `0` te gebruiken als resultaat.
 Dit is *correct* gedrag van gcc, ons programma is fout.
 
-> :information_source: Het is *mogelijk* om de levensduur van een lokale variabele artificeel te verlengen met het keyword `static`. We gaan dit concept in deze lessen niet bekijken, je zal het in IW niet nodig hebben.
+> :information_source: Het is *mogelijk* om de levensduur van een lokale variabele te veranderen met het keyword `static`. We gaan dit concept in deze lessen niet bekijken, je zal het in IW niet nodig hebben.
 
 ### Functiedefinities
 
@@ -214,9 +214,10 @@ Before swap: x = 0, y = 42
 ```
 
 Dit komt omdat de argumenten die we meegaven niet `x` en `y` zijn, maar de *adressen* van `x` en `y`.
-Indien we zouden proberen deze adressen te wijzigen in de swapfunctie door de waarden van de parameters `a` en `b` te wijzigen, zou dat niet lukken.
-Er is namelijk een kopie gemaakt van de *adressen*.
-Je kan adressen van variabelen trouwens niet wijzigen.
+Indien we deze adressen zouden wijzigen in de swapfunctie door de waarden van
+de parameters `a` en `b` te wijzigen, zou dat niet het gewenste resultaat
+opleveren. Ook hier werd er namelijk een kopie gemaakt van de *adressen* en
+zouden we bijgevolg de kopie wijzigen.
 
 > :warning: Bovenstaand voorbeeld wordt vaak **foutief** *pass-by-reference* genoemd. Dat is fout. *pass-by-reference* bestaat niet in C. Een *reference* bestaat niet in C (wel in C++). Voor de geïnteresseerden: [het verschil tussen pointers en references](https://stackoverflow.com/questions/57483/what-are-the-differences-between-a-pointer-variable-and-a-reference-variable-in).
 
@@ -246,7 +247,8 @@ int is_even(int n)
     function_call_counter++;
     if (n < 0)
         n = -n;
-    else if (n == 0)
+    
+    if (n == 0)
     {
         return 1;
     }
@@ -289,7 +291,7 @@ int main()
 
 > **:question: Probeer bovenstaande code te herschrijven zonder gebruik te moeten maken van een global variable. Hint: je kan gebruik maken van een lokale variabele in main waarvan je het adres doorgeeft aan de functies.**
 
-## Dynamische levensduur
+## Dynamische geheugenallocatie
 
 Tijd om terug te springen naar één van de eerste voorbeelden deze les:
 
@@ -308,12 +310,12 @@ int main(void)
 }
 ```
 
-Herinner je dat dit gedrag *undefined behavior* vertoonde omdat de levensduur van `a` stopt op het moment dat de blok code eindigt.
+Herinner je dat dit gedrag *undefined behavior* vertoonde omdat de levensduur van `a` stopt op het moment dat het blok code eindigt.
 
 ### malloc
 
 Er is een manier om dit probleem op te lossen.
-We kunnen een object aanmaken met een *dynamische* levensduur.
+We kunnen een object aanmaken met een levensduur die niet automatisch beheerd wordt.
 De levensduur van dat object is volledig onder de controle van de programmeur zelf.
 Hiervoor gebruiken we de functie `void *malloc(size_t size);` gedeclareerd in de header `<stdlib.h>.`
 
@@ -356,7 +358,7 @@ Het type van `a` definiëren we dus als `int *`.
 
 Met `*a = 42` schrijven we de waarde `42` naar het zonet gereserveerde adres.
 Vervolgens kopiëren we dit adres naar de pointer `p`.
-Merk op dat de levensduur van `a` nog steeds *automatisch* is en eindigt op het einde van de blok code.
+Merk op dat de levensduur van `a` nog steeds *automatisch* is en eindigt op het einde van het blok code.
 We hebben de waarde van `a` gelukkig gekopieerd naar `p`, dus nu bevat `p` een verwijzing naar ons dynamisch gealloceerde object.
 
 In de `printf`-functie lezen we de waarde van dit object.
@@ -364,7 +366,7 @@ Het object bestaat nog steeds dus we hebben geen *undefined behavior*.
 
 ### free
 
-Een dynamisch object blijft leven, en blijft dus gereserveerd in het geheugen, net zo lang tot het programma de functie `void free(void *ptr);` oproept.
+Een dynamisch gealloceerd object blijft leven, en blijft dus gereserveerd in het geheugen, tot het programma de functie `void free(void *ptr);` uitvoert.
 Het adres van het object wordt meegegeven als argument bij het oproepen van `free`.
 
 Het onderstaande programma vertoont *opnieuw* undefined behavior:
@@ -437,7 +439,7 @@ int main(void)
 }
 ```
 
-Dit programma voldoet aan enkele *good practices* bij het gebruik van dynamisch geheugen:
+Dit programma voldoet aan enkele *good practices* bij het gebruik van dynamisch gealloceerd geheugen:
 
 * Controleer dat het resultaat van `malloc` niet `NULL` is;
 * Zorg ervoor dat geheugen, gealloceerd door `malloc`, ook terug met `free` vrijgegeven wordt.
@@ -452,7 +454,7 @@ Enkel door de return-waarde van `malloc` te controleren kunnen we zeker zijn dat
 Manueel geheugenbeheer met `malloc` en `free` is uitdagend.
 Memory leaks zijn een enorm veel voorkomend probleem in C-programma's.
 
-Een memory leak treedt op wanneer dynamisch gealloceerd geheugen niet meer vrijgegeven kan worden.
+Een memory leak treedt op wanneer dynamisch gealloceerd geheugen niet terug wordt vrijgegeven wanneer het niet meer gebruikt zal worden.
 
 Neem bijvoorbeeld onderstaande code:
 
@@ -473,14 +475,15 @@ int main(void)
 }
 ```
 
-De code reserveert 10 dynamische `int` objecten en bewaart de waarde van `i` in elk van deze objecten.
+De code reserveert 10 dynamische gealloceerde `int` objecten en bewaart de waarde van `i` in elk van deze objecten.
 Het adres dat malloc teruggeeft wordt echter elke iteratie overschreven.
 Op het einde van de lus hebben we enkel toegang tot het adres van de laatst gereserveerde `int`.
 Het is vervolgens onmogelijk om de eerste 9 `int` objecten door te geven aan de functie `free`.
 De variabelen zullen eeuwig (tot het einde van het programma) blijven bestaan.
 
 Memory leaks zijn problematisch in programma's die gedurende een lange tijd actief moeten zijn.
-Een memory leak zorgt ervoor dat een programma geheugen vraagt dat nooit terug vrijgegeven kan worden.
+Een memory leak wordt veroorzaakt wanneer een programma geheugen vraagt dat niet
+terug wordt vrijgegeven.
 Hoe langer het programma actief is, hoe meer geheugen het zal vragen.
 Op een bepaald moment zal het geheugen opgeraken.
 
@@ -488,6 +491,6 @@ Het grote probleem met memory leaks is dat ze vaak lastig zijn om te detecteren 
 Code kan zeer veel paden volgen, en in elk mogelijk pad moet een object dat gealloceerd is met `malloc` op een andere plaats vrijgegeven moeten worden met `free`.
 
 Om problemen zoals memory leaks, null pointer dereferences, undefined behavior enzovoort te vermijden worden gehele nieuwe programmeertalen ontwikkeld, zoals bijvoorbeeld [Rust](https://www.rust-lang.org/).
-De meeste van deze soort talen leggen veel meer regels op in het typesysteem, waardoor een compiler veel meer kans heeft fouten terug te vinden.
+De meeste van deze zogenaamde "memory-safe" talen leggen veel meer regels op via het typesysteem, waardoor een compiler veel meer kans heeft fouten terug te vinden.
 Dit soort talen zal je echter pas later in de opleiding tegenkomen.
 Vertrouwd zijn met C en de complexiteit van C zal je vormen tot een betere programmeur en zal je appreciate voor alternatieve, veilige(re) talen in de toekomst waarschijnlijk doen vergroten.
