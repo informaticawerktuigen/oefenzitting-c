@@ -25,7 +25,7 @@
 In de vorige les hebben we geleerd hoe `malloc` gebruikt kan worden om dynamisch objecten in het geheugen aan te maken.
 Hiermee kunnen we zelf de levensduur bepalen van een object.
 
-Dynamisch geheugenallocatie maakt dynamische gegevensstructuren mogelijk.
+Dynamische geheugenallocatie maakt dynamische gegevensstructuren mogelijk.
 Dynamische gegevensstructuren nemen een variabele hoeveelheid geheugen in doorheen de uitvoering van een programma.
 Een voorbeeld is de lijst.
 Aan de hand van dit voorbeeld leggen we in deze les het concept van dynamische gegevensstructuren uit.
@@ -33,8 +33,7 @@ Aan de hand van dit voorbeeld leggen we in deze les het concept van dynamische g
 ## Lijsten
 
 Lijsten zijn verzamelingen van opeenvolgende getallen die kunnen variëren in lengte.
-Een array in C heeft telkens een vaste lengte en neemt altijd een vaste hoeveelheid geheugen in.
-Een lijst kan echter groter worden en kleiner worden.
+Terwijl een array in C een vaste lengte heeft en bijgevolg een vaste hoeveelheid geheugen inneemt, kan een lijst kan groter en kleiner worden.
 
 Bekijk bijvoorbeeld de volgende python-code:
 
@@ -66,7 +65,7 @@ Dit soort lijsten zijn eenvoudig te implementeren in C.
 
 > **:question: Bekijk onderstaande code aandachtig. Kijk of je de code begrijpt. Compileer de code en voer deze uit.**
 
-> :information_source: Velden van een `struct` spreken we normaal met de operator `.` aan. Indien je een pointer naar een `struct s` hebt, zou je dus een veld `field` kunnen aanspreken door te schrijven: `(*s).field`. De operator `->` kan hier als alternatief gebruikt worden: `s->field` doet exact hetzelfde. **Gebruik `->` enkel voor pointers naar structs!**
+> :information_source: Velden van een `struct` spreken we normaal met de operator `.` aan. Indien `ps` een pointer naar een `struct s` is, zou je dus een veld `field` kunnen aanspreken door te schrijven: `(*ps).field`. De operator `->` kan hier als alternatief gebruikt worden: `ps->field` doet exact hetzelfde. **Gebruik `->` enkel voor pointers naar structs!**
 
 ```c
 #include <stdio.h>
