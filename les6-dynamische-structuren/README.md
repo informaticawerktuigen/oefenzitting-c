@@ -140,10 +140,10 @@ Op het eerste zicht lijkt dit misschien een logische implementatie en is het moe
 Je maakt een `struct List` aan in een lokale variabele, met automatische levensduur.
 De variabele `list` *stopt* met bestaan op het einde van de `list_create` functie.
 De functie is gelukkig wel correct.
-De statement `return list;` maakt namelijk een volledige kopie van de zonet aangemaakte lijst.
+Het statement `return list;` maakt namelijk een volledige kopie van de zonet aangemaakte lijst.
 
 Dit is inefficiënt wanneer de `struct` veel plaats inneemt.
-Indien de lijst bijvoorbeeld `400 bytes` groot is, moeten al deze bytes gekopieerd worden in de `return` statement.
+Indien de lijst bijvoorbeeld `400 bytes` groot is, moeten al deze bytes gekopieerd worden in het `return` statement.
 
 Misschien zou je deze inefficiëntie **foutief** proberen oplossen als volgt:
 
