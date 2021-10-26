@@ -22,7 +22,7 @@
 
 ## Introductie
 
-In de vorige les hebben we geleerd hoe `malloc` gebruikt kan worden om dynamischobjecten in het geheugen aan te maken.
+In de vorige les hebben we geleerd hoe `malloc` gebruikt kan worden om dynamisch objecten in het geheugen aan te maken.
 Hiermee kunnen we zelf de levensduur bepalen van een object.
 
 Dynamisch geheugenallocatie maakt dynamische gegevensstructuren mogelijk.
