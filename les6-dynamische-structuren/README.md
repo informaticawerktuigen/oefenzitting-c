@@ -88,7 +88,7 @@ struct List list_create(void)
 
 void list_append(struct List *list, int value)
 {
-    if (list->length == LIST_MAX_SIZE - 1)
+    if (list->length == LIST_MAX_SIZE)
     {
         return;
     }
