@@ -213,7 +213,7 @@ De werking van `fgets` wordt afgebeeld op onderstaande afbeelding. De parameter 
 
 ![fgets-image](img/fgets.svg)
 
-Het onderstaande programma leest strings uit de standaardinvoer met lengte `BUFFER_SIZE - 1`.
+Het onderstaande programma leest strings uit de standaardinvoer. Bij elke iteratie worden maximaal `BUFFER_SIZE - 1` karakters gelezen.
 
 * Compileer het programma en voer het uit. Je kan het testen met interactieve invoer of door met `<` een bestand naar `stdin` te sturen. Test het programma met verschillende waarden van `BUFFER_SIZE` om inzicht te krijgen in de werking van `fgets`.
 
@@ -250,7 +250,7 @@ Merk op dat `gedit` de inhoud toont, maar een waarschuwing geeft: het tekstbesta
 
 Bovenstaande vraag toont aan dat `fgets` onverwacht gedrag kan vertonen wanneer je er bestanden aan meegeeft met vreemde formaten.
 Een grote uitdaging aan low-level programmeren is het feit dat je programma uitgevoerd kan worden met eender welke random invoer.
-Voor deze onschuldige programma's kan het niet veel kwaad, maar stel dat je bijvoorbeeld een web server schrijft in C, kan het incorrect afhandelen van gebruikersinvoer leiden tot zware security vulnerabilities.
+Voor deze onschuldige programma's kan het niet veel kwaad, maar stel dat je bijvoorbeeld een web server schrijft in C, dan kan het incorrect afhandelen van gebruikersinvoer leiden tot zware security vulnerabilities.
 
 > :information_source: Het bestand dat we gegenereerd hebben bevat `\0` op foute plaatsen.
 `\0` toevoegen aan bestanden om te proberen applicaties te exploiten ("hacken") wordt [null byte injection](http://projects.webappsec.org/w/page/13246949/Null%20Byte%20Injection) genoemd.
