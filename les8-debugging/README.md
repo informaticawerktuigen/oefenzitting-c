@@ -95,7 +95,7 @@ $ cat /var/log/bootstrap.log | less
 
 Indien je ongeveer weet waar een fout zich voordoet, kan het toevoegen van een print-statement een snelle en eenvoudige manier zijn om te achterhalen wat misloopt.
 
-Laten we print-debugging eens uitproberen op ons buggy programma van de introductie.
+Laten we printf debugging eens uitproberen op ons buggy programma van de introductie.
 Misschien had je al wel het vermoeden dat de code crasht in één van de twee `if`-cases.
 Er wordt namelijk maar één iteratie uitgevoerd van de for-loop, alvorens de start van de tweede iteratie, crasht het programma.
 Dat zien we aan het feit dat het initiële print-statement maar één keer wordt uitgevoerd.
@@ -127,7 +127,7 @@ Bus error (core dumped)
 ```
 
 Dit maakt ons niet veel wijzer. Welk van de twee print-statements is zonet uitgevoerd?
-Je zou op dit moment misschien tot de conclusie komen dat de if-statement met conditie `i - 1 >= 0` niet uitgevoerd zou moeten worden (want `i == 0`), en dat de code dus crasht in de print-statement van de tweede if-statement.
+Je zou op dit moment misschien tot de conclusie komen dat het if-statement met conditie `i - 1 >= 0` niet uitgevoerd zou moeten worden (want `i == 0`), en dat de code dus crasht in het print-statement van het tweede if-statement.
 
 Dit illustreert meteen een nadeel van deze stijl van debugging.
 Indien je bovenstaande conclusie zou trekken, zou je op een volledig fout spoor terecht kunnen komen.
@@ -156,15 +156,15 @@ My current value is: 0
 Bus error (core dumped)
 ```
 
-Het is dus toch zo dat de eerste if-statement uitgevoerd wordt.
+Het is dus toch zo dat het eerste if-statement uitgevoerd wordt.
 Blijkbaar is `0 - 1 >= 0`?!
 
 > **:question: Kan je op basis van deze info zien wat er misloopt in dit programma?**
 
-Misschien heb je nog niet kunnen verklaren waarom de if-statement uitgevoerd wordt, maar besef je al wel dat de index die we meegeven aan de array incorrect zal zijn.
-Element 0 heeft namelijk geen linkse buur, dat was net de reden van de if-statement.
+Misschien heb je nog niet kunnen verklaren waarom het if-statement uitgevoerd wordt, maar besef je al wel dat de index die we meegeven aan de array incorrect zal zijn.
+Element 0 heeft namelijk geen linkse buur, dat was net de reden van het if-statement.
 Blijkbaar leidt `array[i - 1]` met `i == 0` hier dus tot de *bus error*.
-Door die statement uit te voeren ga je inderdaad een geheugenadres aanspreken, in dit geval blijkbaar een geheugenadres dat niet bestaat.
+Door dat statement uit te voeren ga je inderdaad een geheugenadres aanspreken, in dit geval blijkbaar een geheugenadres dat niet bestaat.
 
 Tijd om de waarde van `i - 1` te printen en het mysterie op te lossen:
 
@@ -224,7 +224,7 @@ int main(void)
 
 Je kan verifiëren dat dit programma wel correct uitvoert.
 
-> :question: In dit programma hebben we ook de tweede if-statement aangepast. Waarom kan `i + 1 < array_length` voor problemen zorgen? Kan `i < array_length - 1` ook mislopen?
+> :question: In dit programma hebben we ook het tweede if-statement aangepast. Waarom kan `i + 1 < array_length` voor problemen zorgen? Kan `i < array_length - 1` ook mislopen?
 
 ## `gdb`
 
@@ -345,7 +345,7 @@ Breakpoint 1 at 0x555555555129: file single-step.c, line 4.
 
 > :information_source: Voer het commando `tui enable` uit in `gdb` om een grafische weergave van de broncode te krijgen. Met `tui disable` kan je terug uit deze modus gaan. Dit kan handig zijn om overzicht te houden gedurende het debuggen.
 
-Indien we het programma nu uitvoeren, zal de uitvoering pauzeren net voor de eerste regel code in de functie `main` wordt uitgevoerd.
+Indien we het programma nu uitvoeren, zal de uitvoering pauzeren net voor de eerste regel code die in de functie `main` wordt uitgevoerd.
 
 >:information_source: Je kan ook een breakpoint plaatsen op een specifieke regel van een bronbestand met het commando `break filename:line`.
 
@@ -735,4 +735,4 @@ $ sudo apt install ddd
 ```
 
 Met `ddd` kan je een programma debuggen door het commando `ddd naam-programma` uit te voeren.
-Instructies over het gebruik van `ddd` om datastructuren zoals gelinkte lijsten te visualiseren kan je vinden op het einde van deze lesvideo.
+Instructies over het gebruik van `ddd` om datastructuren zoals gelinkte lijsten te visualiseren kan je vinden op het einde van de video die bij deze les hoort.
