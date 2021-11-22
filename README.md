@@ -32,35 +32,35 @@ Indien je nog steeds geen UNIX-omgeving hebt, volg dan deze tutorial:
 ## Structuur oefenzitting
 
 Deze oefenzitting heeft een niet-traditionele structuur.
-De zitting zal bestaan uit circa 10 korte lessen die elk een specifiek concept van de programmeertaal C uitlichten.
-Elke dag zal er een nieuwe les online komen met bijhorende video.
+De zitting zal bestaan uit negen korte lessen die elk een specifiek concept van de programmeertaal C uitlichten.
 
 Het is de bedoeling dat je deze lessen de komende drie weken doorneemt.
-Gedurende de drie C-oefenzittingen krijg je de kans vragen te stellen over de lessen en de oefeningen.
+Tijdens de eerste drie C-oefenzittingen krijg je de kans vragen te stellen over de lessen en de oefeningen.
 Het is echter een goed idee hier op voorhand al aan te werken, zodat je de tijd in de zittingen gericht kan gebruiken om geholpen te worden.
 
-Volg alle lessen in volgorde en doe dit zodra ze online staan en je hier tijd voor hebt. Indien je op een later moment in je project zou vastlopen kan je altijd terug naar de specifieke les gaan waarin je probleem behandeld werd.
+Volg alle lessen in de opgegeven volgorde. Indien je op een later moment in je project zou vastlopen kan je altijd terug naar de specifieke les gaan waarin je probleem behandeld werd.
 
-Stel ook zeker vragen op het [discussieforum](https://p.cygnus.cc.kuleuven.be/webapps/discussionboard/do/forum?action=list_threads&course_id=_948319_1&nav=discussion_board_entry&conf_id=_1668620_1&forum_id=_939598_1).
+Stel ook zeker vragen op het [discussieforum](https://p.cygnus.cc.kuleuven.be/webapps/discussionboard/do/forum?action=list_threads&course_id=_1012669_1&nav=discussion_board_entry&conf_id=_1839407_1&forum_id=_1020024_1).
+
+Tijdens de vierde oefenziting zullen jullie aan het project kunnen werken.
 
 ## Het project
 
-Uitgebreide informatie over het project zal verschijnen na de oefenzittingen op vrijdag 04/12.
+Uitgebreide informatie over het project zal verschijnen na de eerste oefenzitting.
 
 ## Tijdsinvestering
 
 Het gehele deel C is begroot op 1 studiepunt (30 uur) en wordt volledig afgewerkt in de komende drie weken.
 
 De bedoeling is dat je elke les in ongeveer 1h30 kan afwerken (video kijken, les doorlopen, oefeningen maken).
-In totaal geeft dat een tijdsinvestering van 15 uur om de taal te leren.
+In totaal geeft dat een tijdsinvestering van ongeveer 15 uur om de taal te leren.
 
-Bij iedere les zal ook een deel van het project horen (hierover vrijdag meer).
-Het project zal dus ook ongeveer 15 uur vergen, gesplitst in kleine delen.
+Het project zal dus ook ongeveer 15 uur vergen.
 
-**Begin op tijd aan het project**. Probeer dagelijks te werken zodra het project beschikbaar is. Volg de lessen op en maak projectdelen zodra je kan.
-De deadline van het project zal vallen op zondag 13/12 23h59, twee dagen na de laatste zitting. Het zal mogelijk gemaakt worden om nog voor de dag van de laatste oefenzitting klaar te zijn met je volledige project.
+**Begin op tijd aan het project**. Probeer dagelijks te werken zodra het project beschikbaar is.
+De deadline van het project zal vallen op zondag 19/12 23h59, twee dagen na de laatste zitting.
 
-> :warning: Hoewel je het laatste weekend (zaterdag 11/12 en zondag 12/12) de mogelijkheid zal hebben verder te werken aan het project, merk op dat de meesten van jullie die laatste week een test hebben voor de vakken SOCS en BRI. De kans is dus groot dat je dit weekend zal willen gebruiken om te studeren voor die vakken. Werk dus op tijd dit project af. Wij zullen ervoor zorgen dat dit mogelijk.
+> :warning: Hoewel je het laatste weekend (zaterdag 18/12 en zondag 19/12) de mogelijkheid zal hebben om verder te werken aan het project, merk op dat de meesten van jullie de laatste week van het semester een test hebben voor de vakken SOCS en BRI. De kans is dus groot dat je dat weekend zal willen gebruiken om te studeren voor die vakken. Werk dus op tijd dit project af.
 
 ## Lessen
 
