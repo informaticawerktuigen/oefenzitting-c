@@ -64,11 +64,11 @@ We zouden kunnen beslissen dat de meest linkse bit aangeeft of het getal negatie
 In dat geval betekent zou `1000 0001` gelijk kunnen zijn aan het getal `-1`.
 Dit noemen we de [*signed magnitude*](https://en.wikipedia.org/wiki/Signed_number_representations) representatie.
 
-We kunnen ook andere regels volgen bij het interpreteren van `1000 0001` als een negatief getal. Stel dat we de regels volgen van de *2-complement*-voorstelling, stellen deze bits het getal `-127` voor.
+We kunnen ook andere regels volgen bij het interpreteren `1000 0001` als een negatief getal. Stel dat we de regels volgen van de *2-complement*-voorstelling, stellen deze bits het getal `-127` voor.
 Hoe we tot dit getal komen kan je nakijken in je SOCS-cursus.
 
 We hebben dezelfde bits ondertussen al kunnen interpreteren als 3 getallen: `129`, `-1`, `-127`. 
-Merk dus op dat de manier waarop je bits interpreteert, bepaalt wat hun waarde is.
+Merk dus op dat de manier waarop je bits interpreteert bepalen wat hun waarde is.
 Meer niet.
 
 ### ASCII
@@ -82,7 +82,7 @@ Dit is wat gebeurt in `ASCII`:
 Merk op dat standaard ASCII maar 127 waarden gebruikt.
 Er zijn [uitbreidingen op ASCII](https://en.wikipedia.org/wiki/Extended_ASCII) die de volledige 256 waarden gebruiken.
 
-Indien we de byte `0011 1111` (decimaal: 63) interpreteren als ASCII-karakter stelt deze byte het karakter `?` voor.
+Indien we de de byte `0011 1111` (decimaal: 63) interpreteren als ASCII-karakter stelt deze byte het karakter `?` voor.
 
 ## C datatypes
 
@@ -164,7 +164,7 @@ int main(void)
 
 Tijd om te kijken wat bovenstaand programma effectief doet.
 Laten we eens kijken naar de machinecode van het programma.
-We laten hiervoor het `print`-statement tijdelijk weg, om enkel de lus te analyseren.
+We laten hiervoor de `print`-statement tijdelijk weg, om enkel de lus te analyseren.
 
 ```bash
 $ objdump --disassemble=main a.out -Mintel | grep -v -e '^$' | grep -v "section"
@@ -185,7 +185,7 @@ $ objdump --disassemble=main a.out -Mintel | grep -v -e '^$' | grep -v "section"
 ```
 
 Indien je deze code zou analyseren, zie je dat de variabele `c` bewaard wordt op de stack (offset -1 van `rbp`).
-Bij elke iteratie wordt de waarde in het register `eax` geladen,
+Elke lusiteratie wordt de waarde in het register `eax` geladen,
 en verhoogd met `1` en terug bewaard op de stack.
 Elke iteratie wordt gecontroleerd of de nieuwe waarde `0` is.
 Zo ja, wordt de lus beeïndigd.
@@ -199,7 +199,7 @@ Indien je 255 keer de waarde `1` optelt bij de getal, krijg je het getal `0b1111
 Bovenstaande optelling veroorzaakt *arithmetische overflow*.
 Er zijn niet genoeg bits om het resultaat voor te stellen.
 
-> :information_source: Volgens de C standaard hangt de waarde van `0b01111111 + 1` af van het datatype. Indien het datatype *signed char* is (dus negatieve waarden kan bevatten) mag een compiler eender welke waarde kiezen als resultaat. Dit is exact de *undefined behavior* die optreedt. De meeste compilers zullen waarschijnlijk kiezen voor de waarde `0b10000000`, maar dat is geen garantie. Indien het getal een *unsigned* getal is, dus nooit negatief kan zijn, is de waarde *wel* gedefinieerd in de standaard. Dan moet het resultaat gelijk zijn aan `0b10000000`.
+> :information_source: Volgens de C standaard hangt de waarde van `0b11111111 + 1` af van het datatype. Indien het datatype *signed* is (dus negatieve waarden kan bevatten) mag een compiler eender welke waarde kiezen als resultaat. Dit is exact de *undefined behavior* die optreedt. De meeste compilers zullen waarschijnlijk kiezen voor de waarde `0`, maar dat is geen garantie. Indien het getal een *unsigned* getal is, dus nooit negatief kan zijn, is de waarde *wel* gedefinieerd in de standaard. Dan moet het resultaat gelijk zijn aan `0`.
 
 Wat we zien gebeuren op mijn machine, indien je de assembly code in detail zou bekijken, is dat de waarde `0b11111111` bewaard wordt in register `eax`, dat 32-bit groot is.
 Het resultaat van `0b11111111` + 1 is dus `0b100000000`, 9 bits lang, dit wordt bewaard in een 32-bit register.
@@ -207,17 +207,11 @@ Enkel de 8 minst significante bits worden echter bewaard op de call stack.
 Dus - het resultaat dat bewaard wordt voor variabele `c` is `0b00000000`.
 Daarom eindigt het programma.
 
-In het algemeen kan je geen uitspraak doen over het gedrag van het
-bovenstaande C programma omdat de C standaard niet voor alle operaties die erin
-gebeuren vastlegt wat het resultaat ervan moet zijn. De C standaard bepaalt
-namelijk niet wat er moet gebeuren wanneer er een postief getal wordt opgeteld
-bij het grootst mogelijke getal dat kan worden voorgesteld door een variable
-van het type 'signed char`. Wanneer er sprake is van *undefined behavior* kan
-de C-compiler kiezen wat er dient te gebeuren, en dat is niet altijd wat je
-in eerste instantie zou verwachten. Zo kan het zijn dat op jouw machine het
-programma in een *oneindige lus* terecht komt.
+In het algemeen kan je geen correct antwoord geven op de vraag of deze `C`-programma's ooit eindigen.
+Doordat de optelling een vorm is van *undefined behavior* kan de C-compiler zelf kiezen hoe het opgelost wordt.
+Het kan in theorie dus zijn dat op jouw machine je toch in een *infinite loop* terecht komt.
 
-Wat we wel zeker weten is dat beide programma's minstens éénmaal, startend bij het getal `0b00000001`, elk mogelijk getal afliepen, tot `0b01111111`.
+Wat we wel zeker weten is dat beide programma's minstens éénmaal, startend bij het getal `0b00000001`, elk mogelijk getal afliepen, tot `0b11111111`.
 Door te printen met `%hhd` *interpreteerden* we deze bits volgens de interne representatie van negatieve getallen. Op de meeste machines zal dit de 2-complementrepresentatie zijn en zal dit er dus toe leiden dat er negatieve getallen verschijnen vanaf het moment dat de meest significante bit `1` wordt.
 Door te printen met `%uud` *interpreteerden* we de bits als positieve getallen, dus zelfs indien de meest significante bit `1` was bleven we normale verhogingen zien.
 
